@@ -1,0 +1,115 @@
+<script type="text/javascript">
+	DEMOBO_DEV=false;
+</script>
+<script src="../jquery.min.js"></script>
+<script src="http://api.demobo.com/js_all_.js"></script>
+<script src="backgroundMessaging.js"></script>
+<script type="text/javascript">
+if (DEMOBO) {
+	DEMOBO.developer = 'developer@demobo.com';
+	setController();
+	DEMOBO.maxPlayers = 1;
+	$.demobo.getDeviceInfo("","setDevice");
+	$.demobo.addEventListener('input',function(e) {
+//		console.log(e);
+		var evt = JSON.stringify({source: e.source, value: e.value});
+		chrome.tabs.getSelected(null, function(tab) {
+        	chrome.tabs.executeScript(tab.id, { code: "handleRemoteInput("+evt+")" });
+    	});
+	},false);
+}
+function setController() {
+	chrome.tabs.getSelected(null, function(tab) {
+		if (tab.url.indexOf('pandora.com')!=-1)
+			DEMOBO.controller = {page: "default", url:"http://touchball.playableitem.demobo.com/button.html", touchEnabled: true};
+		else if (tab.url.indexOf('facebook.com')!=-1)
+			DEMOBO.controller = {page: "default", url:"http://demo.demobo.com/mobile/carousel.html", touchEnabled: true};
+		else 
+			DEMOBO.controller = {page: "default", url: "http://www.demobo.com/app/chrome_ext.html", touchEnabled: true};
+		$.demobo.setController(DEMOBO.controller);	
+	});
+}
+var device;
+function setDevice(data) {
+	device = data;
+	console.log(device);
+};	
+function isPhoneNumber(string) {
+	return string.toUpperCase()==string.toLowerCase();
+}
+function isLink(string) {
+	return (string.substr(0,7) == "http://" || string.substr(0,8) == "https://");
+}	
+function sendToPhone(string) { //string is the text the user selected on the page
+	var data = {};
+	if (isPhoneNumber(string)) {
+		data.text = string;
+		data.link = "tel:"+string;
+		data.action = "Call Number";
+	} else if (isLink(string)) {
+		data.text = string;
+		data.link = string;
+		data.action = "Launch Link";
+	} else {
+		if (device) 
+			var origin = device.latitude + ',' + device.longitude;
+		else {
+			$.demobo.getDeviceInfo("", "setDevice");
+			origin = "";
+		}
+		data.text = string;
+		data.link = 'http://maps.google.com/maps?saddr=' + origin + '&daddr=' + encodeURIComponent(string);
+		data.action = "Driving Direction";
+	}
+	$.demobo.callFunction('popup',data);
+	console.log(string);
+	return 'successful';
+}
+function onMenuClick(e) {
+	var data = {};
+	if (e.linkUrl) {
+		data.text = e.selectionText;
+		data.link = e.linkUrl;
+		data.action = "Launch Link";
+	} 
+	else if (e.mediaType=="image" && e.srcUrl) {
+		data.text = '<img src="'+e.srcUrl+'"/>';
+		data.link = e.srcUrl;
+		data.action = "View Image";
+		data.type = 'image';
+	}
+	else if (e.selectionText) {
+		if (isPhoneNumber(e.selectionText)) {
+			data.text = e.selectionText;
+			data.link = "tel:"+e.selectionText;
+			data.action = "Call Number";
+		} else if (isLink(e.selectionText)) {
+			data.text = e.selectionText;
+			data.link = e.selectionText;
+			data.action = "Launch Link";
+		} else {
+			if (device) 
+				var origin = device.latitude + ',' + device.longitude;
+			else {
+				$.demobo.getDeviceInfo("", "setDevice");
+				origin = "";
+			}
+			data.text = e.selectionText;
+			data.link = 'http://maps.google.com/maps?saddr=' + origin + '&daddr=' + encodeURIComponent(e.selectionText);
+			data.action = "Driving Direction";
+		}
+	}
+	else if (e.pageUrl) {
+		data.text = e.pageUrl;
+		data.link = e.pageUrl;
+		data.action = "Launch Page";
+	}
+	if (data.text) $.demobo.callFunction('popup',data);
+	return true;
+}
+chrome.contextMenus.create({
+    "title": "Send to phone",
+    "contexts": ["page", "selection", "image", "link"],
+    "onclick" : onMenuClick
+});
+</script>
