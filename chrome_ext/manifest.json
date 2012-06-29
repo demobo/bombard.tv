@@ -25,7 +25,6 @@
       "48": "images/icon_48.png",
       "16": "images/icon_16.png"
    },
-   "update_url": "http://bombard.tv/extension/update.xml",
    "homepage_url": "http://bombard.tv",
    "permissions": [
      "http://www.youtube.com/*",
