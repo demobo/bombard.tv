@@ -51,17 +51,17 @@ function handleBackgroundEvent(e) {
 	}
 }
 function handleInputEvent(e) {
-  console.log(e.source);
+  //console.log(e.source);
 	switch (e.source) {
 		case 'commentItem':
-			console.log(e.value);
+			//console.log(e.value);
 			break;
 		case 'videoItem':
 			if (!bombard.unsafeWindow)
 			{
 			    bombard.unsafeWindow = getFGWindow();
 			}
-			console.log(e.value);
+			//console.log(e.value);
 			bombard.unsafeWindow.location = 'watch?v='+e.value;
 			setTimeout(renderBombardBackground,5000);
 			break;
@@ -112,14 +112,14 @@ function handleInputEvent(e) {
 			break;
 		case 'comment':
 	    var c = document.getElementById('live-comment');
-      console.log(c);
+      //console.log(c);
 	    if (!c){
 	      c = document.createElement('table');
 	      c.setAttribute('id','live-comment');
 	      document.getElementById('centerDivWrapper').appendChild(c);
 	    }
   	  c.innerHTML = e.value;
-      console.log(e.value);
+      //console.log(e.value);
 			break;
 	}
 }

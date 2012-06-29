@@ -29,7 +29,7 @@ function setBombardBackground() {
     localStorage.setItem('gb_bomb',0);
     display = 'none';
   }
-  console.log(display);
+  //console.log(display);
 	backgroundDiv.setAttribute('style',
 			'display:'+display+';background-color:rgba(0,0,0,0.6);width:'
 					+ document.width + 'px;height:' + document.height
@@ -41,7 +41,7 @@ function setBombardBackground() {
 	// append the background div
 	document.body.appendChild(backgroundDiv);
 	document.body.appendChild(testDiv);
-	console.log('setBombardBackground finished');
+	//console.log('setBombardBackground finished');
 	return 0;
 }
 function toggleBackground() {
@@ -124,7 +124,7 @@ function getFGWindow() {
 
 function getFBComments()
 {
-  console.log('here at getFBComments');
+  //console.log('here at getFBComments');
 	var ytplayer = getFGWindow().yt.getConfig('PLAYER_REFERENCE');
 	var videoDuration = parseInt(ytplayer.getDuration());
 	var videoKey = ytplayer.getVideoData().video_id;
@@ -158,7 +158,7 @@ function getFBComments()
   function getDoneComments(){
   	jQuery.each(raw_comments,
 			function(index, raw_comment) {
-        console.log('DEBUG '+raw_comment.content);
+        //console.log('DEBUG '+raw_comment.content);
         if (raw_comment.content){
 				  if (raw_comment.content.length < 400) {
 				  	var start = getStartTime(raw_comment) % videoDuration;
@@ -182,7 +182,7 @@ function getFBComments()
 	var dfd = jQuery.Deferred();
 	dfd.done(getRawComments, getDoneComments);
 	dfd.resolve();
-	console.log(raw_comments);
+	//console.log(raw_comments);
 	return comments;
 }
 // get YT comments for a specific video
@@ -190,9 +190,9 @@ function getYTComments(maxResults) {
 	var ytplayer = getFGWindow().yt.getConfig('PLAYER_REFERENCE');
 	var videoDuration = parseInt(ytplayer.getDuration());
 	var videoKey = ytplayer.getVideoData().video_id;
-	console.log('here at getYTComments');
+	//console.log('here at getYTComments');
 	// debugging
-	console.log(videoDuration + '; ' + videoKey);
+	//console.log(videoDuration + '; ' + videoKey);
 	// return;
 
 	var raw_comments = [];
@@ -216,13 +216,13 @@ function getYTComments(maxResults) {
 	}
 
 	function getRawComments() {
-		console.log('in raw ');
+		//console.log('in raw ');
 		for (startIndex = 1; startIndex <= maxResults; startIndex += 50) {
 			// jQuery.getJSON(
 			// youtubeLink(videoKey, startIndex, Math.min(50,
 			// maxResults-startIndex+1)),
 			// extractComment);
-			console.log('raw comment: '+startIndex);
+			//console.log('raw comment: '+startIndex);
 			jQuery.ajax( {
 				url : youtubeLink(videoKey, startIndex, Math.min(50, maxResults
 						- startIndex + 1)),
@@ -235,10 +235,10 @@ function getYTComments(maxResults) {
 
 
 	function getDoneComments() {
-		console.log('in done');
+		//console.log('in done');
 		jQuery.each(raw_comments,
 				function(index, raw_comment) {
-					console.log('Here at in done:',raw_comment.content)
+					//console.log('Here at in done:',raw_comment.content)
 					if (raw_comment.content.length < 300) {
 						var start = getStartTime(raw_comment) % videoDuration;
 						if (comments[start]) {
@@ -270,7 +270,7 @@ function youtubeLink(key, start, max) {
 function removeLink(text)
 {
   var pattern = /http[\S]+youtube[\S]+/g;
-  console.log('@REMOVELINK '+text+'; '+text.replace(pattern, ''));
+  //console.log('@REMOVELINK '+text+'; '+text.replace(pattern, ''));
   return text.replace(pattern, '');
 }
 
@@ -294,10 +294,10 @@ function animateComment(comment) {
 function bg_worker() {
 	if (!bombard.yt_player) {
 		bombard.yt_player = getFGWindow().yt.getConfig('PLAYER_REFERENCE');
-		console.log(bombard.yt_player);
+		//console.log(bombard.yt_player);
 	}
 //	if (bombard.gb_bomb == 1) {
-	// console.log('here at bg_worker: '+localStorage.getItem('gb_bomb'));
+	// //console.log('here at bg_worker: '+localStorage.getItem('gb_bomb'));
   if (localStorage.getItem('gb_bomb')=='1'){
 		if (bombard.worker_running == 0
 				&& bombard.yt_player.getPlayerState() == 1) {
@@ -305,15 +305,15 @@ function bg_worker() {
 			var t = Math.floor(getFGWindow().yt.getConfig('PLAYER_REFERENCE')
 					.getCurrentTime());
 			if (!bombard.ytc) {
-				console.log('bombard.ytc doesn\'t exist');
+				//console.log('bombard.ytc doesn\'t exist');
 				bombard.ytc = getYTComments(250);
-				console.log(bombard.ytc);
+				//console.log(bombard.ytc);
 			}
 
       if (!bombard.fbc) {
-        console.log('bombard.fbc doesn\'t exist');
+        //console.log('bombard.fbc doesn\'t exist');
         bombard.fbc = getFBComments();
-        console.log(bombard.fbc);
+        //console.log(bombard.fbc);
       }
 			if (bombard.ytc[t]) {
 				jQuery.each(bombard.ytc[t], function(index, comment) {
