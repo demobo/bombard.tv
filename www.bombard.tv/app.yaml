@@ -1,0 +1,21 @@
+application: bombarddottv
+version: test
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+
+- url: /css
+  static_dir: css
+
+- url: /images
+  static_dir: images
+
+- url: /script
+  static_dir: script
+
+- url: /.*
+  static_files: index.html
+  upload: index.html
+

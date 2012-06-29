@@ -1,0 +1,44 @@
+{
+   "name": "bombard.tv extension",
+   "description": "bombard.tv extension is a realtime commenting platform for youtube.com",
+   "background": {
+      "page": "background/background.html"
+   },
+   "browser_action":
+   {
+      "default_icon": "images/icon_19.png",
+      "default_title": "BOMBARD.TV",
+      "popup": "popup.html"
+   },
+   "content_scripts": [
+      {
+         "all_frames": false,
+         "js": [ "js/jquery.min.js", "js/jqueryui.min.js", "js/jquery.pause.min.js", "js/animation.js", "js/util.js", "js/messaging.js", "js/main.js"],
+         "css":[ "css/style1.css" ],
+         "matches": [ "http://www.youtube.com/*" ],
+         "run_at": "document_start"
+      }
+   ],
+   "icons":
+   {
+      "128": "images/icon_128.png",
+      "48": "images/icon_48.png",
+      "16": "images/icon_16.png"
+   },
+   "update_url": "http://bombard.tv/extension/update.xml",
+   "homepage_url": "http://bombard.tv",
+   "permissions": [
+     "http://www.youtube.com/*",
+     "chrome://favicon/",
+     "clipboardWrite",
+     "contextMenus",
+     "cookies",
+     "idle",
+     "notifications",
+     "unlimitedStorage",
+     "webRequest",
+     "webRequestBlocking",
+	 "tabs"
+   ],
+   "version": "0.1"
+}

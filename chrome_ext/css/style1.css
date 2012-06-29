@@ -1,0 +1,1746 @@
+.animated-comment {
+	color: white;
+	text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+}
+
+.white
+{
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+
+}
+
+#bombardComment {
+	color: white;
+	position: absolute;
+  	left: 50px;
+	right: 10%;
+	top: 30px;
+	font-family: "Arial Black";
+  color:white;
+	font-size: 100px;
+	font-weight: bolder;
+	-webkit-transition: -webkit-transform 0.6s ease-out;
+	z-index: 9999;
+	text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+}	
+
+#infoDiv
+{
+  position:absolute;
+  width:100px;
+  height:100px;
+  z-index:999999;
+  background-color: rgba(0,0,0,0.9);
+  font-size:40px;
+  text-align:center;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+
+}
+
+#infoDiv > div
+{
+  margin-top:25px;
+  z-index:99999999;
+  font-weight:bold;
+}
+
+#centerDivWrapper 
+{
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  text-align:center;
+}
+
+#live-comment
+{
+  position:relative;
+  margin:auto;
+  font-size:50px;
+  background-color: rgba(0,0,0,0.6);
+  color: #FFFFFF;
+  top:250px;
+  z-index:99999;
+}
+
+#stage 
+{
+  position:absolute;
+  top:150px;
+  z-index:9999;
+}
+
+#stage dd
+{
+	color:#FF0000;
+}
+
+#stage span 
+{
+  font-size: 50px;
+  margin-right:10px;
+}
+
+/*Animation*/
+/*
+Repetitively specify all the browser prefixes.  At least it should make future updates easier.
+*/
+
+/*--------------------------SCENE1--------------------------*/
+
+@-moz-keyframes stage1fadein {
+    0%{
+    opacity: 0.0;
+    }
+    95%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@-o-keyframes stage1fadein {
+    0% {
+    opacity: 0.0;
+    }
+    95%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@-ms-keyframes stage1fadein {
+    0% {
+    opacity: 0.0;
+    }
+    95%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@-webkit-keyframes stage1fadein {
+    0% {
+    opacity: 0.0;
+    }
+    95%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@keyframes stage1fadein {
+    0% {
+    opacity: 0.0;
+    }
+    95%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+
+@-moz-keyframes stage1fadeout {
+    0% {
+    opacity: 1.0;
+    }
+    85%{
+    opacity: 1.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+}
+@-o-keyframes stage1fadeout {
+    0% {
+    opacity: 1.0;
+    }
+    85%{
+    opacity: 1.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+}
+@-ms-keyframes stage1fadeout {
+    0% {
+    opacity: 1.0;
+    }
+    85%{
+    opacity: 1.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+}
+@-webkit-keyframes stage1fadeout {
+    0% {
+    opacity: 1.0;
+    }
+    85%{
+    opacity: 1.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+}
+@keyframes stage1fadeout {
+    0% {
+    opacity: 1.0;
+    }
+    85%{
+    opacity: 1.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+}
+
+@-moz-keyframes stage1scalein {
+    0% {
+    font-size: 100%;
+    margin-top: 0;
+    opacity: 0.0;
+    }
+    49%{
+    opacity: 0.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    90%{
+    font-size: 100%;
+    margin-top: 0;
+    }
+    100% {
+    font-size: 300%;
+    margin-top: -65px;
+    }
+}
+@-o-keyframes stage1scalein {
+    0% {
+    font-size: 100%;
+    margin-top: 0;
+    opacity: 0.0;
+    }
+    49%{
+    opacity: 0.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    90%{
+    font-size: 100%;
+    margin-top: 0;
+    }
+    100% {
+    font-size: 300%;
+    margin-top: -65px;
+    }
+}
+@-ms-keyframes stage1scalein {
+    0% {
+    font-size: 100%;
+    margin-top: 0;
+    opacity: 0.0;
+    }
+    49%{
+    opacity: 0.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    90%{
+    font-size: 100%;
+    margin-top: 0;
+    }
+    100% {
+    font-size: 300%;
+    margin-top: -65px;
+    }
+}
+@-webkit-keyframes stage1scalein {
+    0% {
+    font-size: 100%;
+    margin-top: 0;
+    opacity: 0.0;
+    }
+    49%{
+    opacity: 0.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    90%{
+    font-size: 100%;
+    margin-top: 0;
+    }
+    100% {
+    font-size: 300%;
+    margin-top: -65px;
+    }
+}
+@keyframes stage1scalein {
+    0% {
+    font-size: 100%;
+    margin-top: 0;
+    opacity: 0.0;
+    }
+    49%{
+    opacity: 0.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    90%{
+    font-size: 100%;
+    margin-top: 0;
+    }
+    100% {
+    font-size: 300%;
+    margin-top: -65px;
+    }
+}
+
+#stage #scene1{
+    top: 80px;
+}
+
+#stage #scene1 .start .take1{
+    -moz-animation-name: stage1scalein;
+    -moz-animation-duration: 1.3s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage1scalein;
+    -o-animation-duration: 1.3s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage1scalein;
+    -ms-animation-duration: 1.3s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage1scalein;
+    -webkit-animation-duration: 1.3s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage1scalein;
+    animation-duration: 1.3s;
+    animation-timing-function: linear;
+    font-size: 300%;
+    float: left;
+    margin-top: -65px;
+}
+
+#stage #scene1 .act1, #stage #scene1 .act2,  #stage #scene1 .act3{
+    float: left;
+}
+
+#stage #scene1 .act1 .take1{
+    -moz-animation-name: stage1fadein;
+    -moz-animation-duration: 0.8s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage1fadein;
+    -o-animation-duration: 0.8s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage1fadein;
+    -ms-animation-duration: 0.8s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage1fadein;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage1fadein;
+    animation-duration: 0.8s;
+    animation-timing-function: linear;
+}
+
+#stage #scene1 .act1 .take2{
+    -moz-animation-name: stage1fadein;
+    -moz-animation-duration: 0.9s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage1fadein;
+    -o-animation-duration: 0.9s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage1fadein;
+    -ms-animation-duration: 0.9s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage1fadein;
+    -webkit-animation-duration: 0.9s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage1fadein;
+    animation-duration: 0.9s;
+    animation-timing-function: linear;
+}
+
+#stage #scene1 .act1 .take3{
+    -moz-animation-name: stage1fadein;
+    -moz-animation-duration: 1.0s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage1fadein;
+    -o-animation-duration: 1.0s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage1fadein;
+    -ms-animation-duration: 1.0s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage1fadein;
+    -webkit-animation-duration: 1.0s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage1fadein;
+    animation-duration: 1.0s;
+    animation-timing-function: linear;
+}
+
+#stage #scene1 .act2 .take1{
+    -moz-animation-name: stage1fadein;
+    -moz-animation-duration: 1.4s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage1fadein;
+    -o-animation-duration: 1.4s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage1fadein;
+    -ms-animation-duration: 1.4s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage1fadein;
+    -webkit-animation-duration: 1.4s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage1fadein;
+    animation-duration: 1.4s;
+    animation-timing-function: linear;
+}
+
+#stage #scene1 .act2 .take2{
+    -moz-animation-name: stage1fadein;
+    -moz-animation-duration: 1.5s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage1fadein;
+    -o-animation-duration: 1.5s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage1fadein;
+    -ms-animation-duration: 1.5s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage1fadein;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage1fadein;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+}
+
+#stage #scene1 .act2 .take3{
+    -moz-animation-name: stage1fadein;
+    -moz-animation-duration: 1.7s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage1fadein;
+    -o-animation-duration: 1.7s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage1fadein;
+    -ms-animation-duration: 1.7s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage1fadein;
+    -webkit-animation-duration: 1.7s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage1fadein;
+    animation-duration: 1.7s;
+    animation-timing-function: linear;
+}
+
+#stage #scene1 .act3 .take1{
+    -moz-animation-name: stage1fadein;
+    -moz-animation-duration: 1.9s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage1fadein;
+    -o-animation-duration: 1.9s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage1fadein;
+    -ms-animation-duration: 1.9s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage1fadein;
+    -webkit-animation-duration: 1.9s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage1fadein;
+    animation-duration: 1.9s;
+    animation-timing-function: linear;
+    font-size: 200%;
+    margin-left: 300px;
+}
+
+#stage #scene1 .act3 .take2{
+    -moz-animation-name: stage1fadein;
+    -moz-animation-duration: 2.0s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage1fadein;
+    -o-animation-duration: 2.0s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage1fadein;
+    -ms-animation-duration: 2.0s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage1fadein;
+    -webkit-animation-duration: 2.0s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage1fadein;
+    animation-duration: 2.0s;
+    animation-timing-function: linear;
+    font-size: 150%;
+}
+
+#stage #scene1 .act3 .take3{
+    -moz-animation-name: stage1fadein;
+    -moz-animation-duration: 2.15s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage1fadein;
+    -o-animation-duration: 2.15s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage1fadein;
+    -ms-animation-duration: 2.15s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage1fadein;
+    -webkit-animation-duration: 2.15s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage1fadein;
+    animation-duration: 2.15s;
+    animation-timing-function: linear;
+    font-size: 150%;
+}
+
+#stage #scene1 .act3 .take4{
+    -moz-animation-name: stage1fadein;
+    -moz-animation-duration: 2.3s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage1fadein;
+    -o-animation-duration: 2.3s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage1fadein;
+    -ms-animation-duration: 2.3s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage1fadein;
+    -webkit-animation-duration: 2.3s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage1fadein;
+    animation-duration: 2.3s;
+    animation-timing-function: linear;
+    font-size: 150%;
+}
+
+#stage #scene1 .start, #stage #scene1 .act1, #stage #scene1 .act2{
+    -moz-animation-name: stage1fadeout;
+    -moz-animation-duration: 2.2s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-direction: alternate;
+    -o-animation-name: stage1fadeout;
+    -o-animation-duration: 2.2s;
+    -o-animation-timing-function: linear;
+    -o-animation-direction: alternate;
+    -ms-animation-name: stage1fadeout;
+    -ms-animation-duration: 2.2s;
+    -ms-animation-timing-function: linear;
+    -ms-animation-direction: alternate;
+    -webkit-animation-name: stage1fadeout;
+    -webkit-animation-duration: 2.2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-direction: alternate;
+    animation-name: stage1fadeout;
+    animation-duration: 2.2s;
+    animation-timing-function: linear;
+    animation-direction: alternate;
+    opacity: 0.0;
+}
+
+#stage #scene1 .act3{
+    -moz-animation-name: stage1fadeout;
+    -moz-animation-duration: 2.4s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-direction: alternate;
+    -o-animation-name: stage1fadeout;
+    -o-animation-duration: 2.4s;
+    -o-animation-timing-function: linear;
+    -o-animation-direction: alternate;
+    -ms-animation-name: stage1fadeout;
+    -ms-animation-duration: 2.4s;
+    -ms-animation-timing-function: linear;
+    -ms-animation-direction: alternate;
+    -webkit-animation-name: stage1fadeout;
+    -webkit-animation-duration: 2.4s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-direction: alternate;
+    animation-name: stage1fadeout;
+    animation-duration: 2.4s;
+    animation-timing-function: linear;
+    animation-direction: alternate;
+    opacity: 0.0;
+}
+
+
+/*--------------------------SCENE2--------------------------*/
+
+@-moz-keyframes stage2fadein {
+    0% {
+    opacity: 0.0;
+    margin-left: 1000px;
+    }
+    50%{
+    opacity: 0.0;
+    margin-left: 1000px;
+    }
+    100% {
+    opacity: 1.0;
+    margin-left: 250px;
+    }
+}
+@-o-keyframes stage2fadein {
+    0% {
+    opacity: 0.0;
+    margin-left: 1000px;
+    }
+    50%{
+    opacity: 0.0;
+    margin-left: 1000px;
+    }
+    100% {
+    opacity: 1.0;
+    margin-left: 250px;
+    }
+}
+@-ms-keyframes stage2fadein {
+    0% {
+    opacity: 0.0;
+    margin-left: 1000px;
+    }
+    50%{
+    opacity: 0.0;
+    margin-left: 1000px;
+    }
+    100% {
+    opacity: 1.0;
+    margin-left: 250px;
+    }
+}
+@-webkit-keyframes stage2fadein {
+    0% {
+    opacity: 0.0;
+    margin-left: 1000px;
+    }
+    50%{
+    opacity: 0.0;
+    margin-left: 1000px;
+    }
+    100% {
+    opacity: 1.0;
+    margin-left: 250px;
+    }
+}
+@keyframes stage2fadein {
+    0% {
+    opacity: 0.0;
+    margin-left: 1000px;
+    }
+    50%{
+    opacity: 0.0;
+    margin-left: 1000px;
+    }
+    100% {
+    opacity: 1.0;
+    margin-left: 250px;
+    }
+}
+
+@-moz-keyframes stage2start {
+    0% {
+    opacity: 0.0;
+    }
+    49%{
+    opacity: 0.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    79%{
+    opacity: 1.0;
+    }
+    80%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+}
+@-o-keyframes stage2start {
+    0% {
+    opacity: 0.0;
+    }
+    49%{
+    opacity: 0.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    79%{
+    opacity: 1.0;
+    }
+    80%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+}
+@-ms-keyframes stage2start {
+    0% {
+    opacity: 0.0;
+    }
+    49%{
+    opacity: 0.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    79%{
+    opacity: 1.0;
+    }
+    80%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+}
+@-webkit-keyframes stage2start {
+    0% {
+    opacity: 0.0;
+    }
+    49%{
+    opacity: 0.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    79%{
+    opacity: 1.0;
+    }
+    88%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+}
+@keyframes stage2start {
+    0% {
+    opacity: 0.0;
+    }
+    49%{
+    opacity: 0.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    79%{
+    opacity: 1.0;
+    }
+    80%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+}
+
+
+#stage #scene2 .act4{
+    -moz-animation-name: stage2start;
+    -moz-animation-duration: 3s;
+    -o-animation-name: stage2start;
+    -o-animation-duration: 3s;
+    -ms-animation-name: stage2start;
+    -ms-animation-duration: 3s;
+    -webkit-animation-name: stage2start;
+    -webkit-animation-duration: 3s;
+    animation-name: stage2start;
+    animation-duration: 3s;
+    font-size: 60%;
+    margin-left: 250px;
+    opacity: 0.0;
+}
+#stage #scene2 .act4 .take1{
+    -moz-animation-name: stage2fadein;
+    -moz-animation-duration: 1.8s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage2fadein;
+    -o-animation-duration: 1.8s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage2fadein;
+    -ms-animation-duration: 1.8s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage2fadein;
+    -webkit-animation-duration: 1.8s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage2fadein;
+    animation-duration: 1.8s;
+    animation-timing-function: linear;
+}
+
+#stage #scene2 .act4 .take2{
+    -moz-animation-name: stage2fadein;
+    -moz-animation-duration: 1.9s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage2fadein;
+    -o-animation-duration: 1.9s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage2fadein;
+    -ms-animation-duration: 1.9s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage2fadein;
+    -webkit-animation-duration: 1.9s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage2fadein;
+    animation-duration: 1.9s;
+    animation-timing-function: linear;
+}
+
+#stage #scene2 .act4 .take3{
+    -moz-animation-name: stage2fadein;
+    -moz-animation-duration: 2.0s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage2fadein;
+    -o-animation-duration: 2.0s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage2fadein;
+    -ms-animation-duration: 2.0s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage2fadein;
+    -webkit-animation-duration: 2.0s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage2fadein;
+    animation-duration: 2.0s;
+    animation-timing-function: linear;
+}
+
+
+
+
+/*--------------------------SCENE3--------------------------*/
+
+@-moz-keyframes stage3fadein {
+    0% {
+    opacity: 0.0;
+    }
+    99%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@-o-keyframes stage3fadein {
+    0% {
+    opacity: 0.0;
+    }
+    99%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@-ms-keyframes stage3fadein {
+    0% {
+    opacity: 0.0;
+    }
+    99%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@-webkit-keyframes stage3fadein {
+    0% {
+    opacity: 0.0;
+    }
+    99%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@keyframes stage3fadein {
+    0% {
+    opacity: 0.0;
+    }
+    99%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+
+@-moz-keyframes stage3scale {
+    0% {
+    font-size: 60%;
+    opacity: 1.0;
+    }
+    95%{
+    opacity: 1.0;
+    font-size: 300%;
+    margin-top: 0px;
+    margin-left: -200px;
+    }
+    100% {
+    opacity: 0.0;
+    margin-top: 0px;
+    margin-left: -200px;
+    }
+
+}
+@-o-keyframes stage3scale {
+    0% {
+    font-size: 60%;
+    opacity: 1.0;
+    }
+    95%{
+    opacity: 1.0;
+    font-size: 300%;
+    margin-top: 0px;
+    margin-left: -200px;
+    }
+    100% {
+    opacity: 0.0;
+    margin-top: 0px;
+    margin-left: -200px;
+    }
+
+}
+@-ms-keyframes stage3scale {
+    0% {
+    font-size: 60%;
+    opacity: 1.0;
+    }
+    95%{
+    opacity: 1.0;
+    font-size: 300%;
+    margin-top: 0px;
+    margin-left: -200px;
+    }
+    100% {
+    opacity: 0.0;
+    margin-top: 0px;
+    margin-left: -200px;
+    }
+
+}
+@-webkit-keyframes stage3scale {
+    0% {
+    font-size: 60%;
+    opacity: 1.0;
+    }
+    95%{
+    opacity: 1.0;
+    font-size: 300%;
+    margin-top: 0px;
+    margin-left: -200px;
+    }
+    100% {
+    opacity: 0.0;
+    margin-top: 0px;
+    margin-left: -200px;
+    }
+
+}
+@keyframes stage3scale {
+    0% {
+    font-size: 60%;
+    opacity: 1.0;
+    }
+    95%{
+    opacity: 1.0;
+    font-size: 300%;
+    margin-top: 0px;
+    margin-left: -200px;
+    }
+    100% {
+    opacity: 0.0;
+    margin-top: 0px;
+    margin-left: -200px;
+    }
+
+}
+
+
+
+#stage #scene3 .act5{
+    font-size: 300%;
+    margin-top: 200px;
+    opacity: 0;
+    -moz-animation: stage3scale 1s 0.5s ease-in;
+    -o-animation: stage3scale 1s 0.5s ease-in;
+    -ms-animation: stage3scale 1s 0.5s ease-in;
+    -webkit-animation: stage3scale 1s 0.5s ease-in;
+    animation: stage3scale 1s 0.5s ease-in;
+}
+
+#stage #scene3 .act5 .take1{
+    -moz-animation: stage3fadein 0.3s linear;
+    -o-animation: stage3fadein 0.3s linear;
+    -ms-animation: stage3fadein 0.3s linear;
+    -webkit-animation: stage3fadein 0.3s linear;
+    animation: stage3fadein 0.3s linear;
+    margin-left: 250px;
+}
+
+#stage #scene3 .act5 .take2{
+    -moz-animation: stage3fadein 0.6s linear;
+    -o-animation: stage3fadein 0.6s linear;
+    -ms-animation: stage3fadein 0.6s linear;
+    -webkit-animation: stage3fadein 0.6s linear;
+    animation: stage3fadein 0.6s linear;
+}
+
+/*--------------------------SCENE4--------------------------*/
+@-moz-keyframes stage4fadein {
+    0% {
+    opacity: 0.0;
+    }
+    95%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@-o-keyframes stage4fadein {
+    0% {
+    opacity: 0.0;
+    }
+    95%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@-ms-keyframes stage4fadein {
+    0% {
+    opacity: 0.0;
+    }
+    95%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@-webkit-keyframes stage4fadein {
+    0% {
+    opacity: 0.0;
+    }
+    95%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+@keyframes stage4fadein {
+    0% {
+    opacity: 0.0;
+    }
+    95%{
+    opacity: 0.0;
+    }
+    100% {
+    opacity: 1.0;
+    }
+}
+
+@-moz-keyframes stage4start {
+    0% {
+    opacity: 1.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+
+}
+@-o-keyframes stage4start {
+    0% {
+    opacity: 1.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+
+}
+@-ms-keyframes stage4start {
+    0% {
+    opacity: 1.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+
+}
+@-webkit-keyframes stage4start {
+    0% {
+    opacity: 1.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+
+}
+@keyframes stage4start {
+    0% {
+    opacity: 1.0;
+    }
+    50%{
+    opacity: 1.0;
+    }
+    100% {
+    opacity: 0.0;
+    }
+
+}
+
+#stage #scene4 
+{
+  margin-left:150px;
+}
+
+#stage #scene4 .act6{
+    -moz-animation-name: stage4start;
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 2.7s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4start;
+    -o-animation-delay: 0s;
+    -o-animation-duration: 2.7s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4start;
+    -ms-animation-delay: 0s;
+    -ms-animation-duration: 2.7s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4start;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 2.7s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4start;
+    animation-delay: 0s;
+    animation-duration: 2.7s;
+    animation-timing-function: linear;
+    opacity: 0.0;
+}
+
+#stage #scene4 .act6 .take1{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 0.7s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 0s;
+    -o-animation-duration: 0.7s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 0s;
+    -ms-animation-duration: 0.7s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 0.7s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 0s;
+    animation-duration: 0.7s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act6 .take2{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 0.9s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 0s;
+    -o-animation-duration: 0.9s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 0s;
+    -ms-animation-duration: 0.9s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 0.9s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 0s;
+    animation-duration: 0.9s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act6 .take3{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 1.1s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 0s;
+    -o-animation-duration: 1.1s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 0s;
+    -ms-animation-duration: 1.1s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 1.1s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 0s;
+    animation-duration: 1.1s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act6 .take4{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 1.2s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 0s;
+    -o-animation-duration: 1.2s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 0s;
+    -ms-animation-duration: 1.2s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 1.2s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 0s;
+    animation-duration: 1.2s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act6 .take5{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 1.3s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 0s;
+    -o-animation-duration: 1.3s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 0s;
+    -ms-animation-duration: 1.3s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 1.3s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 0s;
+    animation-duration: 1.3s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act7{
+    margin-top: 130px;
+    margin-left: 400px;
+    font-size: 60%;
+    -moz-transform: rotate(90deg);
+    -moz-animation-name: stage4start;
+    -moz-animation-delay: 1s;
+    -moz-animation-duration: 2.7s;
+    -moz-animation-timing-function: linear;
+    -o-transform: rotate(90deg);
+    -o-animation-name: stage4start;
+    -o-animation-delay: 1s;
+    -o-animation-duration: 2.7s;
+    -o-animation-timing-function: linear;
+    -ms-transform: rotate(90deg);
+    -ms-animation-name: stage4start;
+    -ms-animation-delay: 1s;
+    -ms-animation-duration: 2.7s;
+    -ms-animation-timing-function: linear;
+    -webkit-transform: rotate(90deg);
+    -webkit-animation-name: stage4start;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-duration: 2.7s;
+    -webkit-animation-timing-function: linear;
+    transform: rotate(90deg);
+    animation-name: stage4start;
+    animation-delay: 1s;
+    animation-duration: 2.7s;
+    animation-timing-function: linear;
+    opacity: 0.0;
+}
+
+#stage #scene4 .act7 .take1{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 1s;
+    -moz-animation-duration: 0.7s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 1s;
+    -o-animation-duration: 0.7s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 1s;
+    -ms-animation-duration: 0.7s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-duration: 0.7s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 1s;
+    animation-duration: 0.7s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act7 .take2{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 1s;
+    -moz-animation-duration: 0.9s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 1s;
+    -o-animation-duration: 0.9s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 1s;
+    -ms-animation-duration: 0.9s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-duration: 0.9s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 1s;
+    animation-duration: 0.9s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act7 .take3{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 1s;
+    -moz-animation-duration: 1.1s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 1s;
+    -o-animation-duration: 1.1s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 1s;
+    -ms-animation-duration: 1.1s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-duration: 1.1s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 1s;
+    animation-duration: 1.1s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act7 .take4{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 1s;
+    -moz-animation-duration: 1.3s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 1s;
+    -o-animation-duration: 1.3s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 1s;
+    -ms-animation-duration: 1.3s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-duration: 1.3s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 1s;
+    animation-duration: 1.3s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act7 .take5{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 1s;
+    -moz-animation-duration: 1.5s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 1s;
+    -o-animation-duration: 1.5s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 1s;
+    -ms-animation-duration: 1.5s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 1s;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act8{
+    margin-top: 140px;
+    margin-right: 300px!important;
+    -moz-transform: rotate(180deg);
+    -moz-animation-name: stage4start;
+    -moz-animation-delay: 2.2s;
+    -moz-animation-duration: 2.7s;
+    -moz-animation-timing-function: linear;
+    -o-transform: rotate(180deg);
+    -o-animation-name: stage4start;
+    -o-animation-delay: 2.2s;
+    -o-animation-duration: 2.7s;
+    -o-animation-timing-function: linear;
+    -ms-transform: rotate(180deg);
+    -ms-animation-name: stage4start;
+    -ms-animation-delay: 2.2s;
+    -ms-animation-duration: 2.7s;
+    -ms-animation-timing-function: linear;
+    -webkit-transform: rotate(180deg);
+    -webkit-animation-name: stage4start;
+    -webkit-animation-delay: 2.2s;
+    -webkit-animation-duration: 2.7s;
+    -webkit-animation-timing-function: linear;
+    transform: rotate(180deg);
+    animation-name: stage4start;
+    animation-delay: 2.2s;
+    animation-duration: 2.7s;
+    animation-timing-function: linear;
+    opacity: 0.0;
+}
+
+#stage #scene4 .act8 .take1{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 2.2s;
+    -moz-animation-duration: 0.7s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 2.2s;
+    -o-animation-duration: 0.7s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 2.2s;
+    -ms-animation-duration: 0.7s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 2.2s;
+    -webkit-animation-duration: 0.7s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 2.2s;
+    animation-duration: 0.7s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act8 .take2{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 2.2s;
+    -moz-animation-duration: 0.9s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 2.2s;
+    -o-animation-duration: 0.9s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 2.2s;
+    -ms-animation-duration: 0.9s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 2.2s;
+    -webkit-animation-duration: 0.9s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 2.2s;
+    animation-duration: 0.9s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act8 .take3{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 2.2s;
+    -moz-animation-duration: 1.1s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 2.2s;
+    -o-animation-duration: 1.1s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 2.2s;
+    -ms-animation-duration: 1.1s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 2.2s;
+    -webkit-animation-duration: 1.1s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 2.2s;
+    animation-duration: 1.1s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act8 .take4{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 2.2s;
+    -moz-animation-duration: 1.3s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 2.2s;
+    -o-animation-duration: 1.3s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 2.2s;
+    -ms-animation-duration: 1.3s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 2.2s;
+    -webkit-animation-duration: 1.3s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 2.2s;
+    animation-duration: 1.3s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act9{
+    margin-left: -800px;
+    margin-top: -1100px;
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+    -moz-animation-name: stage4start;
+    -moz-animation-delay: 3.4s;
+    -moz-animation-duration: 1.4s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4start;
+    -o-animation-delay: 3.4s;
+    -o-animation-duration: 1.4s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4start;
+    -ms-animation-delay: 3.4s;
+    -ms-animation-duration: 1.4s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4start;
+    -webkit-animation-delay: 3.4s;
+    -webkit-animation-duration: 1.4s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4start;
+    animation-delay: 3.4s;
+    animation-duration: 1.4s;
+    animation-timing-function: linear;
+    opacity: 0.0;
+}
+
+#stage #scene4 .act9 .take1{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 3.4s;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 3.4s;
+    -o-animation-duration: 0.5s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 3.4s;
+    -ms-animation-duration: 0.5s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 3.4s;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 3.4s;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act9 .take2{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 3.4s;
+    -moz-animation-duration: 0.6s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 3.4s;
+    -o-animation-duration: 0.6s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 3.4s;
+    -ms-animation-duration: 0.6s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 3.4s;
+    -webkit-animation-duration: 0.6s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 3.4s;
+    animation-duration: 0.6s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act9 .take3{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 3.4s;
+    -moz-animation-duration: 0.7s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 3.4s;
+    -o-animation-duration: 0.7s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 3.4s;
+    -ms-animation-duration: 0.7s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 3.4s;
+    -webkit-animation-duration: 0.7s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 3.4s;
+    animation-duration: 0.7s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act9 .take4{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 3.4s;
+    -moz-animation-duration: 0.9s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 3.4s;
+    -o-animation-duration: 0.9s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 3.4s;
+    -ms-animation-duration: 0.9s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 3.4s;
+    -webkit-animation-duration: 0.9s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 3.4s;
+    animation-duration: 0.9s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act9 .take5{
+    -moz-animation-name: stage4fadein;
+    -moz-animation-delay: 3.4s;
+    -moz-animation-duration: 1.0s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-delay: 3.4s;
+    -o-animation-duration: 1.0s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-delay: 3.4s;
+    -ms-animation-duration: 1.0s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-delay: 3.4s;
+    -webkit-animation-duration: 1.0s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-delay: 3.4s;
+    animation-duration: 1.0s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+}
+
+#stage #scene4 .act10{
+    -moz-animation-name: stage5start;
+    -moz-animation-delay: 3.2s;
+    -moz-animation-duration: 3.3s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage5start;
+    -o-animation-delay: 3.2s;
+    -o-animation-duration: 3.3s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage5start;
+    -ms-animation-delay: 3.2s;
+    -ms-animation-duration: 3.3s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage5start;
+    -webkit-animation-delay: 3.2s;
+    -webkit-animation-duration: 3.3s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage5start;
+    animation-delay: 3.2s;
+    animation-duration: 3.3s;
+    animation-timing-function: linear;
+    opacity: 0.0;
+}
+
+#stage #scene4 .act10 .take1{
+    font-size: 480%;
+    line-height: 280%;
+    -moz-animation-name: stage4fadein;
+    -moz-animation-duration: 4.8s;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: stage4fadein;
+    -o-animation-duration: 4.8s;
+    -o-animation-timing-function: linear;
+    -ms-animation-name: stage4fadein;
+    -ms-animation-duration: 4.8s;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-name: stage4fadein;
+    -webkit-animation-duration: 4.8s;
+    -webkit-animation-timing-function: linear;
+    animation-name: stage4fadein;
+    animation-duration: 4.8s;
+    animation-timing-function: linear;
+    opacity: 1.0;
+    position: absolute;
+}
+
+
