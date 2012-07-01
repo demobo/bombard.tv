@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	if (!$('#qrcode')[0]) {
-
 		window.bombardComment = document.createElement('div');
 		bombardComment.setAttribute('id', 'bombardComment');
 		document.body.appendChild(bombardComment);
@@ -18,15 +17,17 @@ $(document).ready(function() {
 		centerDivWrapper.setAttribute('id', 'centerDivWrapper');
 		document.body.appendChild(centerDivWrapper);
 		$(function() {
-			$(document).keyup(function(e) {
+			$(document).keydown(function(e) {
 				var code = (e.keyCode ? e.keyCode : e.which);
 				if (code == 13) {  // enter
-					
+//					e.preventDefault();
+//					renderPlayPause();
 				}     
 				else if (code == 27) {	// esc
-					toggleBackground(); 
+					toggleBackground();
 				}   
-				else if (code == 49) {	// space
+				else if (code == 32) {	// space
+					e.preventDefault();
 					renderPlayPause();
 				}
 			});
