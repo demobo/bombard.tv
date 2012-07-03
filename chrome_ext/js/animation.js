@@ -17,9 +17,9 @@ function animateSpecial(comment) {
   }
 	var newComment = $('<div class="animated-comment '+newClass+'">'+commentText+'</div>');
     newComment.css({position:'absolute', color: color, left: left, 'top': top,'font-family': "Arial Black", 
-    'font-size': fontSize, 'font-weight': 'bolder','-webkit-transition':'-webkit-transform 0.6s ease-out', 'z-index':'9999'});
+    'font-size': fontSize, 'font-weight': 'bolder','-webkit-transition':'-webkit-transform 0.6s ease-out', 'z-index':'9999', '-webkit-transform': 'translateZ(0)'});
     jQuery('body').append(newComment);
-    newComment.animate({opacity : '0.2',}, 5000, function() 
+    newComment.animate({opacity : '0.2'}, 5000, function() 
       {
         newComment.remove();
       }
@@ -38,7 +38,8 @@ function animateDefault(comment) {
 		var left = Math.floor(Math.random() * 40 + 80)  + "%";
 		var fontSize = (Math.floor(Math.random() * 10 + 10))*2 + 'px' || '40px';
 	}
-	var commentText = comment.text || 'hello from Danteng';
+	var animateTime = Math.floor(Math.random() * 10000 + 25000);
+	var commentText = comment.text || '';
 	if (comment.source=="FB"){ 
 		var color = '#3B5998';
 		var newClass = 'white';
@@ -49,9 +50,9 @@ function animateDefault(comment) {
 	}
 	var newComment = $('<div class="animated-comment '+newClass+'">'+commentText+'</div>');
     newComment.css({width:'1000%',position:'absolute', color: color, left:left, 'top':height,'font-family': "Arial Black", 
-    'font-size': fontSize, 'font-weight': 'bolder','-webkit-transition':'-webkit-transform 0.6s ease-out', 'z-index':'9999'});
+    'font-size': fontSize, 'font-weight': 'bolder','-webkit-transition':'-webkit-transform 0.6s ease-out', 'z-index':'9999', '-webkit-transform': 'translateZ(0)'});
     jQuery('body').append(newComment);
-    newComment.animate({left : '-200%',}, 30000, function() 
+    newComment.animate({left : '-200%'}, animateTime, function() 
       {
         newComment.remove();
       }
