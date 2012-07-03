@@ -1,9 +1,6 @@
 {
    "name": "bombard.tv extension",
    "description": "bombard.tv extension is a realtime commenting platform for youtube.com",
-   "background": {
-      "page": "background/background.html"
-   },
    "browser_action":
    {
       "default_icon": "images/icon_19.png",
