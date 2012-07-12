@@ -42,7 +42,7 @@ function handleBackgroundEvent(e) {
 		    else
 		    {
 		    	bombard.yt_player.playVideo();
-		      bg_worker();
+//		      bg_worker();
 		    }
 			break;
 		case 'phone_input':

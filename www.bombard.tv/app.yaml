@@ -15,7 +15,7 @@ handlers:
 - url: /script
   static_dir: script
 
-- url: /.*
+- url: /
   static_files: index.html
   upload: index.html
 

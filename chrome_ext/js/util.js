@@ -56,7 +56,7 @@ function renderBombardBackground() {
 	if (display=='1') {
 		bDiv.style.display = 'block';
 		localStorage.setItem('gb_bomb',1);
-		bg_worker();
+//		bg_worker();
 	} else {
 		bDiv.style.display = 'none';
 		jQuery('.animated-comment').remove();
@@ -67,16 +67,18 @@ function renderPlayPause() {
 	var PLAYING = 1;
     if (bombard.yt_player.getPlayerState()==PLAYING)
     {
+      localStorage.setItem('gb_bomb',0);
     	animateInput('||');
     	bombard.yt_player.pauseVideo();
     	jQuery('.animated-comment').pause();
     }
     else
     {
+      localStorage.setItem('gb_bomb',1);
     	animateInput('&#x25b6;');
     	bombard.yt_player.playVideo();
     	jQuery('.animated-comment').resume();
-    	bg_worker();
+//    	bg_worker();
     }
 }
 // get the absolute position of an element. return an empty object if element is
@@ -298,6 +300,7 @@ function bg_worker() {
 	}
 //	if (bombard.gb_bomb == 1) {
 	// //console.log('here at bg_worker: '+localStorage.getItem('gb_bomb'));
+  console.log('localStorage gb_bomb: '+localStorage.getItem('gb_bomb'));
   if (localStorage.getItem('gb_bomb')=='1'){
 		if (bombard.worker_running == 0
 				&& bombard.yt_player.getPlayerState() == 1) {
@@ -315,6 +318,7 @@ function bg_worker() {
         bombard.fbc = getFBComments();
         //console.log(bombard.fbc);
       }
+      console.log(bombard.worker_running);
 			if (bombard.ytc[t]) {
 				jQuery.each(bombard.ytc[t], function(index, comment) {
 					animateComment(comment);
@@ -329,6 +333,7 @@ function bg_worker() {
 
 			bombard.worker_running -= 1;
 		}
-		setTimeout(bg_worker, 1000);
 	}
+  setTimeout(bg_worker, 1000);
+
 }
