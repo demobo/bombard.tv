@@ -152,25 +152,27 @@ function isInputting(){
 }
 
 function updateComment(code){
-  var value = String.fromCharCode(code);
-//	var obj = jQuery('#bombardComment');
-//  obj.text(obj.text()+value);
-//	if (obj.effect) obj.effect('bounce', { times: 2 }, 50);
+	var val = $('#textInput').val();
+	if (!val) $('#textInput').val(String.fromCharCode(code));
   var c = document.getElementById('live-comment');
   //console.log(c);
   if (!c){
-    c = document.createElement('table');
+    c = document.createElement('div');
     c.setAttribute('id','live-comment');
     document.getElementById('centerDivWrapper').appendChild(c);
   }
-  c.innerHTML = c.innerHTML+value;
-
+	$(c).text($('#textInput').val());
 }
 
 function commitComment(){
   var c = jQuery('#live-comment');
+  RPC.saveComment(bombard.yt_player.getVideoData()['video_id'],c.val());
+  console.log(bombard.yt_player.getVideoData().video_id);
+  console.log(c.val());
   if (c.length==1)
   {
+     RPC.saveComment(bombard.yt_player.getVideoData()['video_id'],$('#textInput').val());
+
 //    $('#textInput').val('');
      var time = bombard.yt_player.getCurrentTime();
      //TODO: youtubePost should use youtube api instead of clicking on the current page

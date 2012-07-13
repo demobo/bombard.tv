@@ -148,27 +148,40 @@ function animateInput(info)
 }
 
 function isInputting(){
-  return jQuery('#bombardComment').length>0 && jQuery('#bombardComment').text()!='';
+  return jQuery('#live-comment').length>0 && jQuery('#live-comment').text()!='';
 }
 
 function updateComment(code){
-  var value = String.fromCharCode(code);
-	var obj = jQuery('#bombardComment');
-  obj.text(obj.text()+value);
-	if (obj.effect) obj.effect('bounce', { times: 2 }, 50);
+	var val = $('#textInput').val();
+	if (!val && code!=91 && code!=93) $('#textInput').val(String.fromCharCode(code));
+  var c = document.getElementById('live-comment');
+  //console.log(c);
+  if (!c){
+    c = document.createElement('div');
+    c.setAttribute('id','live-comment');
+    document.getElementById('centerDivWrapper').appendChild(c);
+    $(c).addClass('running-comment');
+  }
+	$(c).text($('#textInput').val());
 }
 
 function commitComment(){
   var c = jQuery('#live-comment');
+  console.log(bombard.yt_player.getVideoData().video_id);
+  console.log(c.val());
   if (c.length==1)
   {
+     RPC.saveComment(bombard.yt_player.getVideoData()['video_id'],$('#textInput').val());
+
      var time = bombard.yt_player.getCurrentTime();
-     youtubePost(parseInt(time/60)+':'+parseInt(time%60)+' ' + document.getElementById('live-comment').innerHTML);
+     //TODO: youtubePost should use youtube api instead of clicking on the current page
+//     youtubePost(parseInt(time/60)+':'+parseInt(time%60)+' ' + document.getElementById('live-comment').innerHTML);
+     c.css({'background-color':'rgba(0,0,0,0)'});
      c.animate(
      {
       'right' : '-20%',
-      'top' : '150px',
-      'zoom' : '0.5'
+      'top' : '200px',
+      'zoom' : '0.5',
      }, 
      2000
      , 
@@ -178,7 +191,7 @@ function commitComment(){
           c.animate(
           {
             'right':'200%'
-          },8000, function(){ c.remove();});
+          },8000, function(){ c.remove();$('#textInput').val('');});
         }, 500);
      }
      );

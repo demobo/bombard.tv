@@ -135,6 +135,8 @@ function getFBComments()
 
   var raw_comments = [];
 
+  bombard.fbc = {}
+
   function extractComment(response) {
     return jQuery.map(response.data, function(entry, index){
       var rComment = {
@@ -144,13 +146,39 @@ function getFBComments()
       raw_comments.push(rComment);
     });
   }
+  
+  function extractComment2(response) {
+    return jQuery.map(response.data, function(entry, index){
+      var raw_comment = {
+        'published' : entry.created_time,
+        'content' : entry.message
+      };
+      if (raw_comment.content){
+			  if (raw_comment.content.length < 400) {
+			  	var start = getStartTime(raw_comment) % videoDuration;
+			  	if (bombard.fbc[start]) {
+			  		bombard.fbc[start].push( {
+			  			'text' : raw_comment.content,
+              'source': 'FB'
+			  		});
+			  	} else {
+			  		bombard.fbc[start] = [ {
+			  			'text' : raw_comment.content,
+              'source' : 'FB'
+			  		} ];
+			  	}
+			  }
+      }
+
+    });
+  }
 
   function getRawComments(){
       jQuery.ajax( {
 				url :link, 
         dataType : 'json',
-				async : false,
-				success : extractComment
+				async : true,
+				success : extractComment2
 			});
       return;
   }
@@ -181,11 +209,11 @@ function getFBComments()
 			});
     return;
   }
-	var dfd = jQuery.Deferred();
-	dfd.done(getRawComments, getDoneComments);
-	dfd.resolve();
-	//console.log(raw_comments);
-	return comments;
+//	var dfd = jQuery.Deferred();
+//	dfd.done(getRawComments, getDoneComments);
+//	dfd.resolve();
+//	//console.log(raw_comments);
+//	return comments;
 }
 // get YT comments for a specific video
 function getYTComments(maxResults) {
@@ -199,6 +227,8 @@ function getYTComments(maxResults) {
 
 	var raw_comments = [];
 	var comments = {};
+
+  bombard.ytc={};
 
 	// handler of youtube feed
 	function extractComment(data) {
@@ -216,6 +246,34 @@ function getYTComments(maxResults) {
 		}
 		
 	}
+	function extractComment2(data) {
+		if (!data.feed.entry){
+			return;
+		}
+		else{
+			return jQuery.map(data.feed.entry, function(entry, index) {
+				var raw_comment = {
+					'published' : entry.published.$t,
+					'content' : entry.content.$t
+				};
+				if (raw_comment.content.length < 300) {
+					var start = getStartTime(raw_comment) % videoDuration;
+					if (bombard.ytc[start]) {
+						bombard.ytc[start].push( {
+							'text' : raw_comment.content
+						});
+					} else {
+						bombard.ytc[start] = [ {
+							'text' : raw_comment.content
+						} ];
+					}
+//          console.log(bombard.ytc);
+				}
+			});
+		}
+		
+	}
+
 
 	function getRawComments() {
 		//console.log('in raw ');
@@ -229,8 +287,8 @@ function getYTComments(maxResults) {
 				url : youtubeLink(videoKey, startIndex, Math.min(50, maxResults
 						- startIndex + 1)),
 				dataType : 'json',
-				async : false,
-				success : extractComment
+				async : true,
+				success : extractComment2
 			});
 		}
 	}
@@ -256,10 +314,12 @@ function getYTComments(maxResults) {
 
 				});
 	}
-	var dfd = jQuery.Deferred();
-	dfd.done(getRawComments, getDoneComments);
-	dfd.resolve();
-	return comments;
+  getRawComments();
+//  getDoneComments();
+//	var dfd = jQuery.Deferred();
+//	dfd.done(getRawComments, getDoneComments);
+//	dfd.resolve();
+//	return comments;
 }
 
 // query youtube once
@@ -300,7 +360,7 @@ function bg_worker() {
 	}
 //	if (bombard.gb_bomb == 1) {
 	// //console.log('here at bg_worker: '+localStorage.getItem('gb_bomb'));
-  console.log('localStorage gb_bomb: '+localStorage.getItem('gb_bomb'));
+//  console.log('localStorage gb_bomb: '+localStorage.getItem('gb_bomb'));
   if (localStorage.getItem('gb_bomb')=='1'){
 		if (bombard.worker_running == 0
 				&& bombard.yt_player.getPlayerState() == 1) {
@@ -309,22 +369,24 @@ function bg_worker() {
 					.getCurrentTime());
 			if (!bombard.ytc) {
 				//console.log('bombard.ytc doesn\'t exist');
-				bombard.ytc = getYTComments(250);
+//				bombard.ytc = getYTComments(250);
+        getYTComments(250);
 				//console.log(bombard.ytc);
 			}
 
       if (!bombard.fbc) {
         //console.log('bombard.fbc doesn\'t exist');
-        bombard.fbc = getFBComments();
+//        bombard.fbc = getFBComments();
+        getFBComments();
         //console.log(bombard.fbc);
       }
       console.log(bombard.worker_running);
-			if (bombard.ytc[t]) {
+			if (bombard.ytc && bombard.ytc[t]) {
 				jQuery.each(bombard.ytc[t], function(index, comment) {
 					animateComment(comment);
 				});
 			}
-      if (bombard.fbc[t])
+      if (bombard.fbc && bombard.fbc[t])
       {
         jQuery.each(bombard.fbc[t], function (index, comment) {
           animateFBComment(comment);

@@ -1,9 +1,9 @@
 $(document).ready(function() {
-//    //
-//		window.bombardComment = document.createElement('div');
-//		bombardComment.setAttribute('id', 'bombardComment');
-//		document.body.appendChild(bombardComment);
+
+    //set bombard's background
 		setBombardBackground();
+
+    //all data needed by bombard
 		bombard = {};
 		// bombard.gb_bomb = 0;
 		setTimeout(bg_worker, 5000);
@@ -14,15 +14,18 @@ $(document).ready(function() {
 		bombard.yt_player = undefined;
 		bombard.unsafeWindow = undefined;
 
+    //hidden input field which helps non-english input
     var textInput = document.createElement('input');
     textInput.setAttribute('id', 'textInput');
     textInput.setAttribute('type', 'text');
     document.body.appendChild(textInput);
 
-
+    //div to wrap comment typed by user
 		var centerDivWrapper = document.createElement('div');
 		centerDivWrapper.setAttribute('id', 'centerDivWrapper');
 		document.body.appendChild(centerDivWrapper);
+
+    //set up keyboard binding
 	$(function() {
     //TODO: instead of document, we need a more specific dom object
 		$(document).keydown(function(e) {
@@ -36,7 +39,9 @@ $(document).ready(function() {
 			}   
 			else if (code == 32) {	// space
 				e.preventDefault();
-				renderPlayPause();
+        if (!isInputting()){
+ 				  renderPlayPause();
+        }
       }
 		});
   	$(document).click(function(e){
@@ -44,19 +49,7 @@ $(document).ready(function() {
   	});
   	$(document).keyup(function(e){
   		$('#textInput').focus();
-  		var val = $('#textInput').val();
-  		if (!val) $('#textInput').val(String.fromCharCode(e.keyCode));
-      var c = document.getElementById('live-comment');
-      //console.log(c);
-      if (!c){
-        c = document.createElement('div');
-        c.setAttribute('id','live-comment');
-        document.getElementById('centerDivWrapper').appendChild(c);
-      }
-  		$(c).text($('#textInput').val());
-//      .effect('bounce', { times: 2 }, 50);
+      updateComment(e.keyCode);
   	});
-
 	});
-
 });

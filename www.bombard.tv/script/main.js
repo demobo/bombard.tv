@@ -1,8 +1,4 @@
 $(document).ready(function() {
-  //create the div that used to show user's typing comment
-  window.bombardComment = document.createElement('div');
-	bombardComment.setAttribute('id', 'bombardComment');
-	document.body.appendChild(bombardComment);
   
   //set bombard's background
 	setBombardBackground();
@@ -16,20 +12,26 @@ $(document).ready(function() {
 	bombard.fbc = null;
 	bombard.yt_player = null;
 	bombard.unsafeWindow = null;
-  localStorage.setItem('bombard',JSON.stringify(bombard)) ;
-  console.log('the initial bombard object in localStorage: '+localStorage.getItem('bombard'));
+//  localStorage.setItem('bombard',JSON.stringify(bombard)) ;
+//  console.log('the initial bombard object in localStorage: '+localStorage.getItem('bombard'));
   
   //initiate bg_worker
 	setTimeout(bg_worker, 5000);
 
-  //may delete later, dont know purpose now
+  //hidden input field which helps non-english input
+  var textInput = document.createElement('input');
+  textInput.setAttribute('id', 'textInput');
+  textInput.setAttribute('type', 'text');
+  document.body.appendChild(textInput);
+
+  //div to wrap comment typed by user
 	var centerDivWrapper = document.createElement('div');
 	centerDivWrapper.setAttribute('id', 'centerDivWrapper');
 	document.body.appendChild(centerDivWrapper);
 
   //set up keyboard binding 
 	$(function() {
-    //TODO: instead of document, we need a more specific dom object
+    //TODO: instead of document, need a more specific DOM object
 		$(document).keydown(function(e) {
 			var code = (e.keyCode ? e.keyCode : e.which);
 			if (code == 13) {  // enter
@@ -40,17 +42,18 @@ $(document).ready(function() {
 				toggleBackground();
 			}   
 			else if (code == 32) {	// space
-				e.preventDefault();
-        if (isInputting()){
-          updateComment(code);
-        }else{
+        if (!isInputting()){
+				  e.preventDefault();
 				  renderPlayPause();
         }
-			}else{
-        updateComment(code);
       }
 		});
-	});
-
-
+  	$(document).click(function(e){
+  		$('#textInput').focus();
+  	});
+  	$(document).keyup(function(e){
+  		$('#textInput').focus();
+      updateComment(e.keyCode);
+  	});
+ 	});
 });

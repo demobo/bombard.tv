@@ -27,7 +27,8 @@
 	$(document).keyup(function(e){
 		$('#textInput').focus();
 		var val = $('#textInput').val();
-		if (!val) $('#textInput').val(String.fromCharCode(e.keyCode));
+    console.log(e.keyCode);
+		if (!val && e.keyCode>47) $('#textInput').val(String.fromCharCode(e.keyCode));
 		$('#textComment').text($('#textInput').val()).effect('bounce', { times: 2 }, 50);
 	});
 </script>
