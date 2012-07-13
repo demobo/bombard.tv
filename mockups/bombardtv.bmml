@@ -11,7 +11,7 @@
         <backgroundAlpha>0.75</backgroundAlpha>
       </controlProperties>
     </control>
-    <control controlID="3" controlTypeID="com.balsamiq.mockups::Image" x="270" y="105" w="891" h="602" measuredW="1680" measuredH="1050" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Image" x="472" y="173" w="689" h="440" measuredW="1680" measuredH="1050" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <src>../../../../Downloads/cartoon-cannon-bullets-1680x1050.jpeg</src>
         <text/>
@@ -48,8 +48,8 @@
         <text>Bombard.TV</text>
       </controlProperties>
     </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::VideoPlayer" x="469" y="247" w="449" h="337" measuredW="300" measuredH="200" zOrder="8" locked="false" isInGroup="-1"/>
-    <control controlID="11" controlTypeID="com.balsamiq.mockups::Label" x="468" y="219" w="-1" h="-1" measuredW="188" measuredH="24" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::VideoPlayer" x="299" y="236" w="449" h="337" measuredW="300" measuredH="200" zOrder="8" locked="false" isInGroup="-1"/>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Label" x="299" y="212" w="-1" h="-1" measuredW="188" measuredH="24" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
         <size>16</size>
         <text>Overly%20Attached%20Girlfriend</text>
@@ -76,7 +76,7 @@
         <text>Arsenal</text>
       </controlProperties>
     </control>
-    <control controlID="17" controlTypeID="com.balsamiq.mockups::Image" x="469" y="247" w="449" h="298" measuredW="480" measuredH="360" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Image" x="299" y="236" w="449" h="298" measuredW="480" measuredH="360" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
         <src>http%3A//i3.ytimg.com/vi/vN3Sqf8BiY8/0.jpg</src>
         <text/>
