@@ -148,23 +148,14 @@ function animateInput(info)
 }
 
 function isInputting(){
-  return jQuery('live-comment').length>0 && jQuery('live-comment').text()!='';
+  return jQuery('#bombardComment').length>0 && jQuery('#bombardComment').text()!='';
 }
 
 function updateComment(code){
   var value = String.fromCharCode(code);
-//	var obj = jQuery('#bombardComment');
-//  obj.text(obj.text()+value);
-//	if (obj.effect) obj.effect('bounce', { times: 2 }, 50);
-  var c = document.getElementById('live-comment');
-  //console.log(c);
-  if (!c){
-    c = document.createElement('table');
-    c.setAttribute('id','live-comment');
-    document.getElementById('centerDivWrapper').appendChild(c);
-  }
-  c.innerHTML = c.innerHTML+value;
-
+	var obj = jQuery('#bombardComment');
+  obj.text(obj.text()+value);
+	if (obj.effect) obj.effect('bounce', { times: 2 }, 50);
 }
 
 function commitComment(){
@@ -172,8 +163,7 @@ function commitComment(){
   if (c.length==1)
   {
      var time = bombard.yt_player.getCurrentTime();
-     //TODO: youtubePost should use youtube api instead of clicking on the current page
-//     youtubePost(parseInt(time/60)+':'+parseInt(time%60)+' ' + document.getElementById('live-comment').innerHTML);
+     youtubePost(parseInt(time/60)+':'+parseInt(time%60)+' ' + document.getElementById('live-comment').innerHTML);
      c.animate(
      {
       'right' : '-20%',

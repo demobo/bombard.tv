@@ -10,9 +10,10 @@
 }
 
 #bombardComment {
+  background-color:red;
 	color: white;
 	position: absolute;
-  	left: 50px;
+  left: 50px;
 	right: 10%;
 	top: 30px;
 	font-family: "Arial Black";
