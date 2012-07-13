@@ -171,14 +171,17 @@ function commitComment(){
   var c = jQuery('#live-comment');
   if (c.length==1)
   {
+//    $('#textInput').val('');
      var time = bombard.yt_player.getCurrentTime();
      //TODO: youtubePost should use youtube api instead of clicking on the current page
 //     youtubePost(parseInt(time/60)+':'+parseInt(time%60)+' ' + document.getElementById('live-comment').innerHTML);
+     c.css({'background-color':'rgba(0,0,0,0)'});
      c.animate(
      {
       'right' : '-20%',
-      'top' : '150px',
-      'zoom' : '0.5'
+      'top' : '200px',
+      'zoom' : '0.5',
+      
      }, 
      2000
      , 
@@ -188,7 +191,7 @@ function commitComment(){
           c.animate(
           {
             'right':'200%'
-          },8000, function(){ c.remove();});
+          },8000, function(){ c.remove();$('#textInput').val('');});
         }, 500);
      }
      );
