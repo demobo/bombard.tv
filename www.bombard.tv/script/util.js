@@ -1,5 +1,6 @@
 function youtubePost(comment)
 {
+  //TODO: should use youtube api instead of haccking the current window
   if (!bombard.unsafeWindow)
   {
     bombard.unsafeWindow = getFGWindow();
@@ -10,7 +11,10 @@ function youtubePost(comment)
     bombard.unsafeWindow.document.querySelectorAll('.comments-post-buttons span.yt-uix-button-content')[0].click();
     return;
 }
+
 function setBombardBackground() {
+
+  //the trick for extension to get Window outside its scope
 	var testDiv = document.createElement('div');
 	testDiv.setAttribute('id', 'testDiv');
 	testDiv.setAttribute('onclick', 'return window;');
@@ -18,20 +22,22 @@ function setBombardBackground() {
 	// create a background div
 	var backgroundDiv = document.createElement('div');
 	backgroundDiv.setAttribute('id', 'backgroundDiv');
-  var display=localStorage.getItem('bombard_background');
-  if ( display=='1' )
-  {
-    display = 'block';
-    localStorage.setItem('gb_bomb',1);
-  }
-  else
-  {
-    localStorage.setItem('gb_bomb',0);
-    display = 'none';
-  }
+//  var display=localStorage.getItem('bombard_background');
+//  display='1';
+//  if ( display=='1' )
+//  {
+//    display = 'block';
+//    localStorage.setItem('gb_bomb',1);
+//  }
+//  else
+//  {
+//    localStorage.setItem('gb_bomb',0);
+//    display = 'none';
+//  }
   //console.log(display);
+  localStorage.setItem('gb_bomb',1);
 	backgroundDiv.setAttribute('style',
-			'display:'+display+';background-color:rgba(0,0,0,0.6);width:'
+			'display:block;background-color:rgba(0,0,0,0.6);width:'
 					+ document.width + 'px;height:' + document.height
 					+ 'px;position:absolute;top:0px;z-index:999');
 	// set the video window z-index
@@ -56,15 +62,18 @@ function removeBombardElements(){
 }
 
 function toggleBackground() {
-	var display = localStorage.getItem('bombard_background');
-	if (display=='1') localStorage.setItem('bombard_background','0');
-	else localStorage.setItem('bombard_background','1');
+	var display = bombard.backgroundOn;
+	if (display==1){ 
+    bombard.backgroundOn = 0;
+	}else{ 
+    bombard.backgroundOn = 1;
+  }  
 	renderBombardBackground();
 }
 function renderBombardBackground() {
 	var bDiv = jQuery('#backgroundDiv')[0];
-	var display = localStorage.getItem('bombard_background');
-	if (display=='1') {
+	var display = bombard.backgroundOn;
+	if (display==1) {
 		bDiv.style.display = 'block';
 		localStorage.setItem('gb_bomb',1);
 //		bg_worker();
@@ -408,6 +417,7 @@ function bg_worker() {
 		}
 	}
   if(!!bombard){
+    //running_worker = setTimeout(bg_worker, 1000);
     setTimeout(bg_worker, 1000);
   }
 }

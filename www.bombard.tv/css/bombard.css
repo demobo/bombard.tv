@@ -38,7 +38,7 @@
 	text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
 }	
 
-#infoDiv
+#demobo-infoDiv
 {
   position:absolute;
   width:100px;
@@ -54,7 +54,7 @@
 
 }
 
-#infoDiv > div
+#demobo-infoDiv > div
 {
   margin-top:25px;
   z-index:99999999;
@@ -71,7 +71,7 @@
   text-align:center;
 }
 
-#live-comment
+#running-live-comment, #live-comment
 {
   position:absolute;
   width:900px;

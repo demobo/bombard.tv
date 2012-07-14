@@ -6,14 +6,12 @@ $(document).ready(function() {
   //all data needed by bombard
 	bombard = {};
 	// bombard.gb_bomb = 0;
-	bombard.background_on = 0;
+  bombard.backgroundOn = 1;
 	bombard.worker_running = 0;
 	bombard.ytc = null;
 	bombard.fbc = null;
 	bombard.yt_player = null;
 	bombard.unsafeWindow = null;
-//  localStorage.setItem('bombard',JSON.stringify(bombard)) ;
-//  console.log('the initial bombard object in localStorage: '+localStorage.getItem('bombard'));
   
   //initiate bg_worker
 	setTimeout(bg_worker, 5000);
@@ -32,28 +30,48 @@ $(document).ready(function() {
   //set up keyboard binding 
 	$(function() {
     //TODO: instead of document, need a more specific DOM object
-		$(document).keydown(function(e) {
+		$(document).keyup(function(e) {
 			var code = (e.keyCode ? e.keyCode : e.which);
-			if (code == 13) {  // enter
-      	e.preventDefault();
-        commitComment();
-			}     
-			else if (code == 27) {	// esc
-				toggleBackground();
-			}   
-			else if (code == 32) {	// space
-        if (!isInputting()){
-				  e.preventDefault();
-				  renderPlayPause();
+      
+      if (bombard.backgroundOn){
+          //the user is typing
+        if (isInputting()){
+          //if user presses ENTER, bomb the comment
+          if (code == 13){
+            commitComment();
+          }else{
+            $('#textInput').focus();
+            updateComment(code);
+          }
+          
+        //user is not typing  
+        }else{
+			    if (code == 13) {  // enter
+    	     	e.preventDefault();
+			   	}else if (code == 27) {	// esc
+            e.preventDefault();
+			   		toggleBackground();
+            $('#textInput').blur();
+			   	}else if (code == 32) {	// space
+			   		e.preventDefault();
+			   		renderPlayPause();
+           
+          //alphanumerical keys 
+    	    }else if (code>47 && code<91){
+    	       $('#textInput').focus();
+    	       updateComment(code);
+    	    }
+        }
+      }else{
+        if (code == 27){
+          e.preventDefault();
+          toggleBackground();
+          $('#textInput').focus();
         }
       }
-		});
+    });
   	$(document).click(function(e){
   		$('#textInput').focus();
-  	});
-  	$(document).keyup(function(e){
-  		$('#textInput').focus();
-      updateComment(e.keyCode);
   	});
  	});
   bombardLoading=undefined;

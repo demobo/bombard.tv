@@ -26,6 +26,26 @@ function animateSpecial(comment) {
     );
 }
 
+//animate showElement
+function animateUserComment(showElement){
+  
+  showElement.animate({
+   'right' : '-20%',
+   'top' : '200px',
+   'zoom' : '0.5',
+  }, 2000, function(){
+    setTimeout(
+      function(){
+        showElement.animate(
+        {
+          'right':'200%'
+        },8000, function(){
+          showElement.remove();
+        });
+      }, 500);
+  });
+}
+
 function animateDefault(comment) {
 	if (comment.text.length > 140)
 		return;
