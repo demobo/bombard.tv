@@ -44,6 +44,17 @@ function setBombardBackground() {
 	//console.log('setBombardBackground finished');
 	return 0;
 }
+
+function removeBombardElements(){
+  bombard=undefined; 
+  $('#textInput').remove();
+  $('#centerDivWrapper').remove();
+  $('#backgroundDiv').remove();
+  $('.animated-comment').remove();
+  $('.bbd-script').remove();
+  
+}
+
 function toggleBackground() {
 	var display = localStorage.getItem('bombard_background');
 	if (display=='1') localStorage.setItem('bombard_background','0');
@@ -396,6 +407,7 @@ function bg_worker() {
 			bombard.worker_running -= 1;
 		}
 	}
-  setTimeout(bg_worker, 1000);
-
+  if(!!bombard){
+    setTimeout(bg_worker, 1000);
+  }
 }

@@ -152,17 +152,19 @@ function isInputting(){
 }
 
 function updateComment(code){
-	var val = $('#textInput').val();
-	if (!val && code!=91 && code!=93) $('#textInput').val(String.fromCharCode(code));
-  var c = document.getElementById('live-comment');
-  //console.log(c);
-  if (!c){
-    c = document.createElement('div');
-    c.setAttribute('id','live-comment');
-    document.getElementById('centerDivWrapper').appendChild(c);
-    $(c).addClass('running-comment');
+  if (code!=32 || isInputting()){
+  	var val = $('#textInput').val();
+  	if (!val && code!=91 && code!=93) $('#textInput').val(String.fromCharCode(code));
+    var c = document.getElementById('live-comment');
+    //console.log(c);
+    if (!c){
+      c = document.createElement('div');
+      c.setAttribute('id','live-comment');
+      document.getElementById('centerDivWrapper').appendChild(c);
+      $(c).addClass('running-comment');
+    }
+  	$(c).text($('#textInput').val());
   }
-	$(c).text($('#textInput').val());
 }
 
 function commitComment(){

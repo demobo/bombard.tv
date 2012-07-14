@@ -56,4 +56,5 @@ $(document).ready(function() {
       updateComment(e.keyCode);
   	});
  	});
+  bombardLoading=undefined;
 });
