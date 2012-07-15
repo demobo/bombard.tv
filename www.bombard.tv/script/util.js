@@ -22,19 +22,6 @@ function setBombardBackground() {
 	// create a background div
 	var backgroundDiv = document.createElement('div');
 	backgroundDiv.setAttribute('id', 'backgroundDiv');
-//  var display=localStorage.getItem('bombard_background');
-//  display='1';
-//  if ( display=='1' )
-//  {
-//    display = 'block';
-//    localStorage.setItem('gb_bomb',1);
-//  }
-//  else
-//  {
-//    localStorage.setItem('gb_bomb',0);
-//    display = 'none';
-//  }
-  //console.log(display);
   localStorage.setItem('gb_bomb',1);
 	backgroundDiv.setAttribute('style',
 			'display:block;background-color:rgba(0,0,0,0.6);width:'
