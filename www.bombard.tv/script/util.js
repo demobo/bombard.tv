@@ -23,10 +23,10 @@ function setBombardBackground() {
 	var backgroundDiv = document.createElement('div');
 	backgroundDiv.setAttribute('id', 'backgroundDiv');
   localStorage.setItem('gb_bomb',1);
-	backgroundDiv.setAttribute('style',
-			'display:block;background-color:rgba(0,0,0,0.6);width:'
-					+ document.width + 'px;height:' + document.height
-					+ 'px;position:absolute;top:0px;z-index:999');
+//	backgroundDiv.setAttribute('style',
+//			'display:block;background-color:rgba(0,0,0,0.6);width:'
+//					+ document.width + 'px;height:' + document.height
+//					+ 'px;position:absolute;top:0px;z-index:999');
 	// set the video window z-index
 	var videoWindow = document.querySelectorAll('#watch-player > embed')[0];
 	videoWindow.style.zIndex = '1000';
