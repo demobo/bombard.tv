@@ -1,0 +1,201 @@
+from google.appengine.api import urlfetch, taskqueue
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp import util
+from google.appengine.ext.webapp import template
+from google.appengine.runtime import DeadlineExceededError
+import os
+import os.path
+import wsgiref.handlers
+# import facebook graph api
+from lib import facebook
+# import facebook conf
+import conf
+# import database model
+import model
+
+import logging
+import datetime
+import Cookie
+from django.utils import simplejson as json
+from uuid import uuid4
+import base64
+import time
+import hmac
+import hashlib
+import traceback
+
+class CsrfException(Exception):
+    pass
+
+class RequestHandler(webapp.RequestHandler):
+    user_id = None
+    access_token = None
+    csrf_protect = True
+    
+    def initialize(self, request, response):
+        super(RequestHandler, self).initialize(request, response)
+        try:
+            self.init_facebook()
+#            self.init_csrf()
+            self.response.headers[u'P3P'] = u'CP=HONK'  # cookies in iframes in IE
+        except Exception, ex:
+            self.log_exception(ex)
+            raise
+    
+    def handle_exception(self, ex, debug_mode):
+        """Invoked for unhandled exceptions by webapp"""
+        self.log_exception(ex)
+        self.render(u'error.html', trace=traceback.format_exc(), debug_mode=debug_mode)
+       
+    def log_exception(self, ex):
+        """Internal logging handler to reduce some App Engine noise in errors"""
+        msg = ((str(ex) or ex.__class__.__name__) +
+                u': \n' + traceback.format_exc())
+        if isinstance(ex, urlfetch.DownloadError) or \
+           isinstance(ex, DeadlineExceededError) or \
+           isinstance(ex, CsrfException) or \
+           isinstance(ex, taskqueue.TransientError):
+            logging.warn(msg)
+        else:
+            logging.error(msg)             
+ 
+    def init_facebook(self):
+        signed_request = None
+        if u'signed_request' in self.request.POST:
+            signed_request = facebook.parse_signed_request(self.request.get('signed_request'), conf.FACEBOOK_APP_SECRET)
+            self.request.method = u'GET'
+            if signed_request:
+                if u'user_id' in signed_request:
+                    self.user_id = signed_request['user_id']
+                if u'oauth_token' in signed_request:
+                    self.access_token = signed_request['oauth_token']
+                self.set_cookie('u', self.user_cookie, datetime.timedelta(minutes=1440))    
+        elif 'u' in self.request.cookies:
+            signed_request = facebook.parse_signed_request(self.request.cookies.get('u'), conf.FACEBOOK_APP_SECRET)
+            if signed_request:
+                if u'user_id' in signed_request:
+                    self.user_id = signed_request['user_id']
+                if u'oauth_token' in signed_request:
+                    self.access_token = signed_request['oauth_token']
+                
+    
+    def init_csrf(self):
+        """Issue and handle CSRF token as necessary"""
+        self.csrf_token = self.request.cookies.get(u'c')
+        if not self.csrf_token:
+            self.csrf_token = str(uuid4())[:8]
+            self.set_cookie('c', self.csrf_token)
+        if self.request.method == u'POST' and self.csrf_protect and self.csrf_token != self.request.POST.get(u'_csrf_token'):
+            raise CsrfException(u'Missing or invalid CSRF token.')
+                    
+    def set_cookie(self, name, value, expires=None):
+        """Set a cookie"""
+        if value is None:
+            value = 'deleted'
+            expires = datetime.timedelta(minutes=-50000)
+        jar = Cookie.SimpleCookie()
+        jar[name] = value
+        jar[name]['path'] = u'/'
+        if expires:
+            if isinstance(expires, datetime.timedelta):
+                expires = datetime.datetime.now() + expires
+            if isinstance(expires, datetime.datetime):
+                expires = expires.strftime('%a, %d %b %Y %H:%M:%S')
+            jar[name]['expires'] = expires
+        self.response.headers.add_header(*jar.output().split(u': ', 1))
+ 
+    @staticmethod
+    def base64_url_decode(data):
+        data = data.encode(u'ascii')
+        data += '=' * (4 - (len(data) % 4))
+        return base64.urlsafe_b64decode(data)
+
+    @staticmethod
+    def base64_url_encode(data):
+        return base64.urlsafe_b64encode(data).rstrip('=')
+            
+    @property
+    def user_cookie(self):
+        """Generate a signed_request value based on current state"""
+        if not self.user_id:
+            return
+        payload = self.base64_url_encode(json.dumps({
+            u'user_id': self.user_id,
+            u'issued_at': str(int(time.time())),
+            u'algorithm': u'HMAC-SHA256',
+            u'oauth_token': self.access_token,
+        }))
+        sig = self.base64_url_encode(hmac.new(
+            conf.FACEBOOK_APP_SECRET, msg=payload, digestmod=hashlib.sha256).digest())
+        return sig + '.' + payload             
+            
+    """Provides access to the active Facebook user in self.current_user
+
+    The property is lazy-loaded on first access, using the cookie saved
+    by the Facebook JavaScript SDK to determine the user ID of the active
+    user. See http://developers.facebook.com/docs/authentication/ for
+    more information.
+    """
+    @property
+    def current_user(self):
+        """Returns the active user, or None if the user has not logged in."""
+        if not hasattr(self, "_current_user"):
+            self._current_user = None
+            if not self.user_id:
+                cookie = facebook.get_user_from_cookie(
+                    self.request.cookies, conf.FACEBOOK_APP_ID, conf.FACEBOOK_APP_SECRET)
+                if cookie:
+                    if u'uid' in cookie:
+                        self.user_id = cookie[u'uid']
+                    if u'access_token' in cookie:    
+                        self.access_token = cookie[u'access_token']      
+            if self.user_id:
+                # Store a local instance of the user data so we don't need
+                # a round-trip to Facebook on every request
+                user = model.User.get_by_key_name(self.user_id)
+                if not user:
+                    graph = facebook.GraphAPI(self.access_token)
+                    profile = graph.get_object("me", fields=u'name,link,email,picture,friends,first_name,last_name')
+                    user = model.User(key_name=str(profile["id"]),
+                                id=str(profile["id"]),
+                                name=profile["name"],
+                                profile_url=profile["link"],
+                                access_token=self.access_token,
+                                email = profile["email"] if "email" in profile else '',
+                                picture = profile["picture"],
+                                friends = [user[u'id'] for user in profile["friends"][u'data']],
+                                first_name=profile["first_name"],
+                                last_name=profile["last_name"]
+                                )
+                    user.put()
+                elif user.access_token != self.access_token:
+                    user.access_token = self.access_token
+                    user.put()
+                self._current_user = user
+        return self._current_user
+
+    @property
+    def graph(self):
+        """Returns a Graph API client for the current user."""
+        if not hasattr(self, "_graph"):
+            if self.current_user:
+                self._graph = facebook.GraphAPI(self.current_user.access_token)
+            else:
+                self._graph = facebook.GraphAPI()
+        return self._graph
+
+    def render(self, path, **kwargs):
+        args = dict(current_user=self.current_user,
+                    facebook_app_id=conf.FACEBOOK_APP_ID)
+        args[u'js_conf'] = json.dumps({
+            u'appId': conf.FACEBOOK_APP_ID,
+            u'canvasName': conf.FACEBOOK_CANVAS_NAME,
+            u'external_href': conf.EXTERNAL_HREF,
+            u'userIdOnServer': self.user_id
+        })
+        args[u'app_name'] = conf.FACEBOOK_APP_NAME
+        args[u'conf'] = conf
+        args.update(kwargs)
+        path = os.path.join(os.path.dirname(__file__), "../templates", path)
+#        self.response.headers["P3P"] = 'CP="IDC CURa ADMa OUR IND PHY ONL COM STA"'
+        self.response.out.write(template.render(path, args))

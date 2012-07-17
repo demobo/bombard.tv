@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<div id="Videowrapper">
+    <div id="Bullet1" class="bullet">
+    </div>
+    <div id="Bullet2" class="bullet">
+    </div>
+    <div id="Bullet3" class="bullet">
+    </div>
+    <div id="Bullet4" class="bullet">
+    </div>
+    <div id="Bullet5" class="bullet">
+    </div>
+    <div id="Bullet6" class="bullet">
+    </div>
+    <div id="Bullet7" class="bullet">
+    </div>
+    <div id="Mask">
+    </div>
+    <div id="Videobox">
+        <div id="videoDiv">
+            Loading...
+        </div>
+    </div>
+    <div id="Videoresults">
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        console.log($('.bullet'));
+		
+    });
+</script>
+<script src="http://www.google.com/jsapi" type="text/javascript">
+</script>
+<script type="text/javascript">
+                google.load("swfobject", "2.1");
+                google.load('search', '1');
+        		function _run() {
+        			// The video to load.
+        			var videoID = "ylLzyHk54Z0";
+        			{% if vid %}var videoID ="{{ vid }}";{% endif %}
+        			// Lets Flash from another domain call JavaScript
+        			var params = { allowScriptAccess: "always" };
+        			// The element id of the Flash embed
+        			var atts = { id: "ytPlayer" };
+        			// All of the magic handled by SWFObject (http://code.google.com/p/swfobject/)
+        			swfobject.embedSWF("http://www.youtube.com/v/" + videoID + "?version=3&enablejsapi=1&playerapiid=player1", 
+        			                   "videoDiv", "720", "440", "9", null, null, params, atts);
+					var bullets = $('.bullet');
+					for (var i=0; i<bullets.length; i++) {
+						var left = -1 * parseInt($(bullets[i]).css('background-position').split(' ')[0]);
+						$(bullets[i]).animate({left: left}, 5000);
+					}				   
+        		}
+        		google.setOnLoadCallback(_run);
+                    
+                function OnLoad() {
+        			// Create a search control
+        			var searchControl = new google.search.SearchControl();		
+        			// So the results are expanded by default
+        			options = new google.search.SearcherOptions();
+        			options.setExpandMode(google.search.SearchControl.EXPAND_MODE_OPEN);		
+        			// Create a video searcher
+        			var videoSearch = new google.search.VideoSearch();		
+        			// Set the result order of the search - check docs for other orders
+        			videoSearch.setResultOrder(google.search.Search.ORDER_BY_DATE);
+        			
+        			// Add our searcher to the control
+        			searchControl.addSearcher(videoSearch, options);
+        			
+        			// create a drawOptions object
+    			    var drawOptions = new google.search.DrawOptions();
+    			    
+    			    // tell the searcher to draw itself in linear mode
+    			    drawOptions.setDrawMode(google.search.SearchControl.DRAW_MODE_TABBED);
+    				
+        			// Draw the control onto the page
+        			searchControl.draw(document.getElementById("Searchbar"), drawOptions);
+        			
+        			// Because laughing is healthy.
+        			searchControl.execute("funny");
+    				
+    				searchControl.setSearchCompleteCallback(this, OnSearchComplete);
+                }
+                google.setOnLoadCallback(OnLoad);
+                    
+    			OnSearchComplete = function(sc, searcher) {
+    				$("#Videoresults").html("");
+    				for (var i=0; i<searcher.results.length; i++) {
+    					var vid = searcher.results[i].tbUrl.split('/')[4];
+    					var videoresult = $('<div class="videoresult"><a href="javascript:loadVideo(\''+vid+'\')"><img src="'+searcher.results[i].tbUrl+'"></a></div>');
+    					$("#Videoresults").append(videoresult);
+    //					console.log(searcher.results[i]);
+    				}
+    				
+    			};
+				
+    			// This function is called when an error is thrown by the player
+			    function onPlayerError(errorCode) {
+			      alert("An error occured of type:" + errorCode);
+			    }
+			    
+			    // This function is automatically called by the player once it loads
+			    function onYouTubePlayerReady(playerId) {
+			      ytplayer = document.getElementById("ytPlayer");
+			      ytplayer.addEventListener("onError", "onPlayerError");
+			    }
+				
+				function loadVideo(videoID) {
+				  if(ytplayer) {
+				    ytplayer.loadVideoById(videoID);
+				  }
+				}
+</script>
+{% endblock %}
