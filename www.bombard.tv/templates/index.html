@@ -18,14 +18,18 @@
     </div>
     <div id="Bullet7" class="bullet">
     </div>
-    <div id="Mask">
+    <div id="DarkMask">
     </div>
     <div id="Videobox">
         <div id="videoDiv">
             Loading...
         </div>
     </div>
-    <div id="Videoresults">
+    <div id="Videoresultsbox">
+    	<div id="Videoresults">
+    	</div>
+    	<div id="LightMask">
+    	</div>
     </div>
 </div>
 <script>
@@ -52,8 +56,10 @@
         			                   "videoDiv", "720", "440", "9", null, null, params, atts);
 					var bullets = $('.bullet');
 					for (var i=0; i<bullets.length; i++) {
-						var left = -1 * parseInt($(bullets[i]).css('background-position').split(' ')[0]);
-						$(bullets[i]).animate({left: left}, 5000);
+						var left = (-1 * parseInt($(bullets[i]).css('background-position').split(' ')[0]) - 300) + "px";
+						$(bullets[i]).animate({left: left}, 7000, function() {
+							$("#Videobox").animate({'z-index':200});
+						});
 					}				   
         		}
         		google.setOnLoadCallback(_run);

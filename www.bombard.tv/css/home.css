@@ -24,6 +24,7 @@ a {
     box-shadow: inset 0 1px white, 0 1px 3px rgba(34, 25, 25, 0.4);
     -moz-box-shadow: inset 0 1px #fff, 0 1px 2px rgba(34, 25, 25, 0.4);
     -webkit-box-shadow: inset 0 1px white, 0 1px 3px rgba(34, 25, 25, 0.4);
+	opacity: 0.7;
 }
 
 #Header li {
@@ -124,7 +125,7 @@ a {
 #Bullet2 {
     background-position: -370px -270px;
     width: 350px;
-    height: 300px;
+    height: 294px;
     left: 1000px;
     top: 270px;
 }
@@ -141,7 +142,7 @@ a {
     background-position: -870px -605px;
     width: 73px;
     height: 62px;
-    left: 1000px;
+    left: 2000px;
     top: 605px;
 }
 
@@ -150,16 +151,15 @@ a {
     width: 205px;
     height: 165px;
     left: 2000px;
-    top: 1px;
+    top: 31px;
 }
 
 #Bullet6 {
-    background-position: -900px -275px;
-    width: 2000px;
+    background-position: -1030px -275px;
+    width: 613px;
     height: 800px;
-    left: 1000px;
+    left: 1500px;
     top: 275px;
-	zoom: 0.9;
 }
 
 #Bullet7 {
@@ -168,16 +168,25 @@ a {
     height: 128px;
     left: 2000px;
     top: 50px;
-	zoom: 0.8;
 }
 
-#Mask {
+#DarkMask {
     width: 100%;
     height: 100%;
+    bottom: 0px;
     position: absolute;
-    z-index: 200;
     background: black;
     opacity: 0.7;
+}
+
+#LightMask {
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+    position: absolute;
+    background: #FAF7F7;
+    opacity: 0.7;
+	z-index: -1;
 }
 
 #Searchbar {
@@ -191,13 +200,17 @@ a {
     overflow: hidden;
 }
 
-#Videoresults {
+#Videoresultsbox {
     position: absolute;
     bottom: 0px;
     height: 20%;
     width: 100%;
-    background-color: #FAF7F7;
     z-index: 220;
+}
+
+#Videoresults {
+    height: 100%;
+    width: 100%;
 }
 
 #Videoresults .videoresult {
