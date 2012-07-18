@@ -45,7 +45,6 @@ function removeBombardElements(){
   $('#backgroundDiv').remove();
   $('.animated-comment').remove();
   $('.bbd-script').remove();
-  
 }
 
 function toggleBackground() {
@@ -360,6 +359,46 @@ function animateComment(comment) {
 	else animateDefault(comment);
 }
 
+function bg_worker2() {
+	if (!bombard.yt_player) {
+		bombard.yt_player = getFGWindow().yt.getConfig('PLAYER_REFERENCE');
+		//console.log(bombard.yt_player);
+	}
+//	if (bombard.gb_bomb == 1) {
+	// //console.log('here at bg_worker: '+localStorage.getItem('gb_bomb'));
+//  console.log('localStorage gb_bomb: '+localStorage.getItem('gb_bomb'));
+  if (localStorage.getItem('gb_bomb')=='1'){
+		if (bombard.yt_player.getPlayerState() == 1) {
+			var t = Math.floor(getFGWindow().yt.getConfig('PLAYER_REFERENCE')
+					.getCurrentTime());
+			if (!bombard.ytc) {
+				//console.log('bombard.ytc doesn\'t exist');
+//				bombard.ytc = getYTComments(250);
+        getYTComments(250);
+				//console.log(bombard.ytc);
+			}
+
+      if (!bombard.fbc) {
+        //console.log('bombard.fbc doesn\'t exist');
+//        bombard.fbc = getFBComments();
+        getFBComments();
+        //console.log(bombard.fbc);
+      }
+      console.log(bombard.worker_running);
+			if (bombard.ytc && bombard.ytc[t]) {
+				jQuery.each(bombard.ytc[t], function(index, comment) {
+					animateComment(comment);
+				});
+			}
+      if (bombard.fbc && bombard.fbc[t])
+      {
+        jQuery.each(bombard.fbc[t], function (index, comment) {
+          animateFBComment(comment);
+        })
+      }
+		}
+	}
+}
 function bg_worker() {
 	if (!bombard.yt_player) {
 		bombard.yt_player = getFGWindow().yt.getConfig('PLAYER_REFERENCE');
@@ -405,6 +444,6 @@ function bg_worker() {
 	}
   if(!!bombard){
     //running_worker = setTimeout(bg_worker, 1000);
-    setTimeout(bg_worker, 1000);
+//    console.log(setTimeout(bg_0worker, 1000));
   }
 }

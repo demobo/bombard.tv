@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     //set bombard's background
 		setBombardBackground();
+    chrome.extension.sendRequest({}, function (resonse) {});
 
     //all data needed by bombard
 		bombard = {};

@@ -7,20 +7,21 @@ $(document).ready(function() {
 	bombard = {};
 	// bombard.gb_bomb = 0;
   bombard.backgroundOn = 1;
-	bombard.worker_running = 0;
 	bombard.ytc = null;
 	bombard.fbc = null;
 	bombard.yt_player = null;
 	bombard.unsafeWindow = null;
+  bombard.workerId = null;
   
   //initiate bg_worker
-	setTimeout(bg_worker, 5000);
+//	setTimeout(bg_worker, 5000);
 
   //hidden input field which helps non-english input
   var textInput = document.createElement('input');
   textInput.setAttribute('id', 'textInput');
   textInput.setAttribute('type', 'text');
   document.body.appendChild(textInput);
+  $(textInput).focus();
 
   //div to wrap comment typed by user
 	var centerDivWrapper = document.createElement('div');
@@ -74,5 +75,10 @@ $(document).ready(function() {
   		$('#textInput').focus();
   	});
  	});
+  if (!bombard.workerId){
+    bombard.workerId=setInterval(bg_worker2,1000);
+    localStorage.setItem('workerId',bombard.workerId);
+  }
+  localStorage.removeItem('bombardLoading');
   bombardLoading=undefined;
 });
