@@ -53,7 +53,8 @@ function Request(function_name, opt_argv) {
 
 	// Create an XMLHttpRequest 'GET' request w/ an optional callback handler
 	var req = new XMLHttpRequest();
-	var serverUrl = 'http://trivia.playableitem.demobo.com';
+	// var serverUrl = 'http://trivia.playableitem.demobo.com';
+	var serverUrl = '';
 	req.open("POST", serverUrl + '/rpc', async);
 	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
