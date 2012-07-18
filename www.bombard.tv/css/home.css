@@ -286,7 +286,7 @@ h2 {
     line-height: 1em;
     background: white url(../images/buttonGradient10.png) top left repeat-x;
     border: 1px solid white;
-    cursor: move;
+    cursor: pointer;
     border-radius: 8px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;

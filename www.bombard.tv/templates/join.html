@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block body %}
+<div id="AboutRight">
+    <h1>Goodies</h1>
+    <h2 id="pinmarklet">“Pin It” Button</h2>
+    <div id="PinItButtonContainer">
+        <div id="PinButton">
+            <div id="ButtonHolder">
+                <a onclick="alert('Drag me to the bookmarks bar'); return false;" href="javascript:(function(){var bombardScript = document.createElement('script');bombardScript.setAttribute('src', 'http://www.bombard.tv/script/bombard.js');document.body.appendChild(bombardScript);}());" title="Pin It" id="BigPinItButton"><strong>Pin It</strong><span></span></a>
+                <p id="ButtonInstructions">
+                    ←&nbsp; Add this link to your Bookmarks Bar
+                </p>
+            </div>
+            <p>
+                To install the “Pin It” button in Chrome:
+            </p>
+            <div id="InstallationInstructions" class="small">
+                <ol>
+                    <li>
+                        Display your Bookmarks by clicking the <strong>Wrench Icon &gt; Bookmarks &gt; Show Bookmarks Bar</strong>
+                    </li>
+                    <li>
+                        Drag the “Pin It” button to your Bookmarks bar
+                    </li>
+                    <li>
+                        When you are browsing the web, push the “Pin It” button to pin an image
+                    </li>
+                </ol>
+            </div>
+            <p>
+                Once installed in your browser, the “Pin It” button lets you grab an image from any website and add it to one of your pinboards. When you pin from a website, we automatically grab the source link so we can credit the original creator.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
