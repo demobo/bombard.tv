@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block body %}
+<div id="AboutRight">
+    
+    <h2 id="bombardmarklet">“Bombard” Button</h2>
+    <div id="BombardItButtonContainer">
+        <div id="BombardButton">
+            <div id="ButtonHolder">
+                <a onclick="alert('Drag me to the bookmarks bar'); return false;" href="javascript:(function(){var bombardScript = document.createElement('script');bombardScript.setAttribute('src', 'http://www.bombard.tv/script/bombard.js');document.body.appendChild(bombardScript);}());" title="Bombard" id="BigBombardItButton"><strong>Bombard</strong><span></span></a>
+                <p id="ButtonInstructions">
+                    ←&nbsp; Add this link to your Bookmarks Bar
+                </p>
+            </div>
+            <p>
+                To install the “Bombard” button in Chrome:
+            </p>
+            <div id="InstallationInstructions" class="small">
+                <ol>
+                    <li>
+                        Display your Bookmarks by clicking the <strong>Wrench Icon &gt; Bookmarks &gt; Show Bookmarks Bar</strong>
+                    </li>
+                    <li>
+                        Drag the “Bombard” button to your Bookmarks bar
+                    </li>
+                    <li>
+                        When you are watching the youtube video, push the “Bombard” button to view Bombard comments
+                    </li>
+                </ol>
+            </div>
+            <p>
+                Once installed in your browser, the “Bombard” button lets you activate the realtime animated comments when you are watching youtube video.
+            </p>
+        </div>
+    </div>
+	
+    <h2 id="bombardmarklet">“Bombard” Extension</h2>
+    <div id="BombardItButtonContainer">
+        <div id="BombardButton">
+            <div id="ButtonHolder">
+                <a href="https://chrome.google.com/webstore/detail/pgepfgacjhmbpamiemgiolchbonbpiml?utm_source=chrome-ntp-icon" title="Download" id="BigBombardExtButton"><strong>Download</strong><span></span></a>
+                <p id="ButtonInstructions">
+                    ←&nbsp; Download and install this extension
+                </p>
+            </div>
+        </div>
+    </div>	
+</div>
+{% endblock %}	
