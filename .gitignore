@@ -3,5 +3,5 @@
 # cache files #
 *.swp
 *.un~
-.DS_Store
+*.DS_Store
 .project

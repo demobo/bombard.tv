@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" class="en">
+<head>
+<title>Bombard TV</title>
+<meta http-equiv="content-script-type" content="text/javascript">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+<!-- Style -->
+<link rel="stylesheet" type="text/css" href="css/home.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+{% block head %}{% endblock %}
+</head>
+<body>
+<div id="body">
+	<div id="Header">
+		<div id="Searchbar"></div>
+		<a href="/" id="Bombarddottv"><div id="Headertitle">Bombard TV</div></a>
+		<ul id="Navigation">
+			<!--<li><a href="/join" class="nav">Join<span></span></a></li>-->
+			<li><a href="/howto" class="nav">Tutorial<span></span></a></li>
+	    	<!--<li id="UserNav"><a href="/jaylinterest" class="nav"><img src="http://media-cache-ec4.pinterest.com/avatars/jaylinterest_1330475273.jpg" alt="img">Jeff<span></span></a></li>-->
+		</ul>
+	</div>
+	{% block body %}{% endblock %}
+</div>
+</body>
+</html>

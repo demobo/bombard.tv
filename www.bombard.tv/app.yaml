@@ -1,8 +1,7 @@
 application: bombarddottv
 version: test
-runtime: python27
+runtime: python
 api_version: 1
-threadsafe: true
 
 handlers:
 
@@ -15,7 +14,6 @@ handlers:
 - url: /script
   static_dir: script
 
-- url: /
-  static_files: index.html
-  upload: index.html
+- url: .*
+  script: main.py  
 
