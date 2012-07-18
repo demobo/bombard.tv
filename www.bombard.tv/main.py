@@ -14,17 +14,25 @@ class MainPage(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), "templates", template_file_name)
 		self.response.out.write(template.render(path, template_values)) 
         
-class AboutHandler(webapp.RequestHandler):
+class JoinHandler(webapp.RequestHandler):
 	def get(self):
-		template_file_name = 'about.html'     
+		template_file_name = 'join.html'     
 		template_values = {}
 		path = os.path.join(os.path.dirname(__file__), "templates", template_file_name)
 		self.response.out.write(template.render(path, template_values)) 
-      
+   
+class HowtoHandler(webapp.RequestHandler):
+	def get(self):
+		template_file_name = 'howto.html'     
+		template_values = {}
+		path = os.path.join(os.path.dirname(__file__), "templates", template_file_name)
+		self.response.out.write(template.render(path, template_values)) 
+		      
 def main():
     routes = [
     	(r"/", MainPage),
-        (r"/about", AboutHandler),
+        (r"/join", JoinHandler),
+        (r"/howto", HowtoHandler),
         (r"/rpc", RPCHandler)
     ]
     application = webapp.WSGIApplication(routes, debug=os.environ.get('SERVER_SOFTWARE', '').startswith('Dev'))

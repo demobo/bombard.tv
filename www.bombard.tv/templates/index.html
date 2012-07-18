@@ -43,10 +43,8 @@
 <script type="text/javascript">
                 google.load("swfobject", "2.1");
                 google.load('search', '1');
-        		function _run() {
-        			// The video to load.
-        			var videoID = "ylLzyHk54Z0";
-        			{% if vid %}var videoID ="{{ vid }}";{% endif %}
+        		function init() {
+        			{% if vid %} videoID ="{{ vid }}";{% endif %}
         			// Lets Flash from another domain call JavaScript
         			var params = { allowScriptAccess: "always" };
         			// The element id of the Flash embed
@@ -56,13 +54,13 @@
         			                   "videoDiv", "720", "440", "9", null, null, params, atts);
 					var bullets = $('.bullet');
 					for (var i=0; i<bullets.length; i++) {
-						var left = (-1 * parseInt($(bullets[i]).css('background-position').split(' ')[0]) - 300) + "px";
-						$(bullets[i]).animate({left: left}, 7000, function() {
-							$("#Videobox").animate({'z-index':200});
-						});
+						if (i==0 || i==2) var left = (-1 * parseInt($(bullets[i]).css('background-position').split(' ')[0]) - 300) + "px";
+						else if (i==1) var left = (-1 * parseInt($(bullets[i]).css('background-position').split(' ')[0]) + 150) + "px";
+						else var left = (-1 * parseInt($(bullets[i]).css('background-position').split(' ')[0]) - 100) + "px";
+						var timeout = 7000 - i*500;
+						$(bullets[i]).animate({left: left}, timeout);
 					}				   
         		}
-        		google.setOnLoadCallback(_run);
                     
                 function OnLoad() {
         			// Create a search control
@@ -100,9 +98,9 @@
     					var vid = searcher.results[i].tbUrl.split('/')[4];
     					var videoresult = $('<div class="videoresult"><a href="javascript:loadVideo(\''+vid+'\')"><img src="'+searcher.results[i].tbUrl+'"></a></div>');
     					$("#Videoresults").append(videoresult);
-    //					console.log(searcher.results[i]);
     				}
-    				
+    				videoID = vid;
+					init();
     			};
 				
     			// This function is called when an error is thrown by the player

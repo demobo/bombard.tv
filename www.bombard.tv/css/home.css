@@ -4,9 +4,10 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fiel
 }
 
 body {
-    font-family: "verdana";
-    color: black;
     overflow: hidden;
+    font-family: "helvetica neue", arial, sans-serif;
+    font-size: 10px;
+    color: #211922;
 }
 
 a {
@@ -14,6 +15,24 @@ a {
     color: #221919;
     text-decoration: none;
     outline: none;
+}
+
+h1 {
+    clear: both;
+    margin: 1px 0 32px;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 43px;
+    text-shadow: 0 1px white;
+}
+
+h2 {
+    clear: both;
+    margin: 50px 0 18px;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 38px;
+    text-shadow: 0 1px white;
 }
 
 #Header {
@@ -24,7 +43,7 @@ a {
     box-shadow: inset 0 1px white, 0 1px 3px rgba(34, 25, 25, 0.4);
     -moz-box-shadow: inset 0 1px #fff, 0 1px 2px rgba(34, 25, 25, 0.4);
     -webkit-box-shadow: inset 0 1px white, 0 1px 3px rgba(34, 25, 25, 0.4);
-	opacity: 0.7;
+    opacity: 0.7;
 }
 
 #Header li {
@@ -115,59 +134,59 @@ a {
 }
 
 #Bullet1 {
-    background-position: 0px -545px;
-    width: 460px;
-    height: 370px;
-    left: 1000px;
-    top: 545px;
-}
-
-#Bullet2 {
-    background-position: -370px -270px;
-    width: 350px;
-    height: 294px;
-    left: 1000px;
-    top: 270px;
-}
-
-#Bullet3 {
-    background-position: -740px -240px;
-    width: 100px;
-    height: 85px;
-    left: 1000px;
-    top: 240px;
-}
-
-#Bullet4 {
     background-position: -870px -605px;
     width: 73px;
     height: 62px;
+    left: 2200px;
+    top: 555px;
+}
+
+#Bullet2 {
+    background-position: -740px -240px;
+    width: 100px;
+    height: 85px;
     left: 2000px;
-    top: 605px;
+    top: 240px;
 }
 
-#Bullet5 {
-    background-position: -872px -1px;
-    width: 205px;
-    height: 165px;
-    left: 2000px;
-    top: 31px;
-}
-
-#Bullet6 {
-    background-position: -1030px -275px;
-    width: 613px;
-    height: 800px;
-    left: 1500px;
-    top: 275px;
-}
-
-#Bullet7 {
+#Bullet3 {
     background-position: -1480px -5px;
     width: 146px;
     height: 128px;
-    left: 2000px;
+    left: 1800px;
     top: 50px;
+}
+
+#Bullet4 {
+    background-position: -872px -1px;
+    width: 205px;
+    height: 165px;
+    left: 1600px;
+    top: 31px;
+}
+
+#Bullet5 {
+    background-position: -370px -270px;
+    width: 350px;
+    height: 294px;
+    left: 1400px;
+    top: 270px;
+}
+
+#Bullet6 {
+    background-position: 0px -545px;
+    width: 460px;
+    height: 370px;
+    left: 1200px;
+    top: 545px;
+}
+
+#Bullet7 {
+    background-position: -1030px -275px;
+    width: 613px;
+    height: 800px;
+    left: 2000px;
+    top: 275px;
 }
 
 #DarkMask {
@@ -186,7 +205,7 @@ a {
     position: absolute;
     background: #FAF7F7;
     opacity: 0.7;
-	z-index: -1;
+    z-index: -1;
 }
 
 #Searchbar {
@@ -220,4 +239,93 @@ a {
 
 #Videoresults .videoresult img {
     width: 150px;
+}
+
+#AboutRight {
+    width: 620px;
+    margin-left: 228px;
+}
+
+#BombardButton {
+    width: 632px;
+    margin: 0 auto;
+}
+
+#ButtonHolder {
+    margin-bottom: 31px;
+    padding: 15px;
+    background-color: #DAECF6;
+    border-top: 1px solid #C4DDEF;
+    overflow: hidden;
+}
+
+#BigBombardItButton {
+    float: left;
+    margin-right: 18px;
+    padding: 11px 15px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1em;
+    background: white url(../images/buttonGradient10.png) top left repeat-x;
+    border: 1px solid white;
+    cursor: move;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.5);
+    -moz-box-shadow: 0 1px 2px rgba(34, 25, 25, 0.5);
+    -webkit-box-shadow: 0 1px 2px rgba(34, 25, 25, 0.5);
+}
+
+#BigBombardExtButton {
+    float: left;
+    margin-right: 18px;
+    padding: 11px 15px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1em;
+    background: white url(../images/buttonGradient10.png) top left repeat-x;
+    border: 1px solid white;
+    cursor: move;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.5);
+    -moz-box-shadow: 0 1px 2px rgba(34, 25, 25, 0.5);
+    -webkit-box-shadow: 0 1px 2px rgba(34, 25, 25, 0.5);
+}
+
+#BombardButton p:nth-child(2) {
+	text-align: center;
+}
+
+#ButtonHolder p {
+	margin: 0;
+	padding-top: 10px;
+}
+
+#BombardButton p {
+	margin: 0 0 18px;
+	font-size: 18px;
+	font-weight: 300;
+	line-height: 24px;
+	text-shadow: 0 1px white;
+}
+
+#AboutRight .small li {
+	margin-bottom: 8px;
+	font-size: 14px;
+	line-height: 19px;
+}
+
+#BombardButton ol li {
+	margin: 0 0 8px 24px;
+	list-style: decimal outside;
+	font-size: 18px;
+	line-height: 24px;
+	font-weight: 300;
+}
+
+#Headertitle {
+	font-size: 16px;
 }
