@@ -1,6 +1,6 @@
 {
    "name": "bombard.tv extension",
-   "description": "bombard.tv extension is a realtime commenting platform for youtube.com",
+   "description": "Bomb your comments realtime on the videos with BOMBARD!!!",
    "page_action":
    {
       "default_icon": "images/icon_19.png",
@@ -37,5 +37,5 @@
      "webRequestBlocking",
 	 "tabs"
    ],
-   "version": "0.1.1"
+   "version": "0.1.2"
 }
