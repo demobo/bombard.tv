@@ -12,6 +12,7 @@ $(document).ready(function() {
 	bombard.yt_player = null;
 	bombard.unsafeWindow = null;
   bombard.workerId = null;
+  bombard.domain = getCurrentDomain();
   
   //initiate bg_worker
 //	setTimeout(bg_worker, 5000);

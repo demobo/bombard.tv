@@ -12,7 +12,7 @@
    "content_scripts": [
       {
          "all_frames": false,
-         "js": ["js/bombard.js"],
+         "js": ["js/bombard-extension.js"],
          "matches": [ "http://www.youtube.com/*" ],
          "run_at": "document_end"
       }
