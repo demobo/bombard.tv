@@ -80,13 +80,15 @@
     			    var drawOptions = new google.search.DrawOptions();
     			    
     			    // tell the searcher to draw itself in linear mode
-    			    drawOptions.setDrawMode(google.search.SearchControl.DRAW_MODE_TABBED);
+    			    // drawOptions.setDrawMode(google.search.SearchControl.DRAW_MODE_TABBED);
     				
         			// Draw the control onto the page
         			searchControl.draw(document.getElementById("Searchbar"), drawOptions);
         			
-        			// Because laughing is healthy.
-        			searchControl.execute("funny");
+					// Set the result set to large
+					videoSearch.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+					
+        			searchControl.execute("ytfeed:most_viewed");
     				
     				searchControl.setSearchCompleteCallback(this, OnSearchComplete);
                 }
