@@ -35,7 +35,11 @@
 <script>
     $(document).ready(function(){
         console.log($('.bullet'));
-		
+      setTimeout(function(){
+        var bombardScript = document.createElement('script');
+        bombardScript.setAttribute('src', 'http://www.bombard.tv/script/bombard.js');
+        document.body.appendChild(bombardScript);		
+      }, 2000);
     });
 </script>
 <script src="http://www.google.com/jsapi" type="text/javascript">
@@ -125,5 +129,4 @@
 				}
 </script>
 {% endblock %}
-<script src="http://www.bombard.tv/script/bombard.js" type="text/javascript">
 
