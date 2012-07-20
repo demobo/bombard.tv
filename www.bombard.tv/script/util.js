@@ -14,15 +14,18 @@ function youtubePost(comment)
 
 function setBombardBackground() {
   var videoWindow;
-  switch (getCurrentDomain()){
+  switch (bombard.domain){
     case 'www.youtube.com':
 	    videoWindow = document.querySelectorAll('#watch-player > embed')[0];
+      videoWindow.style.zIndex = '1000';
       break;
+    case 'localhost':
     case 'www.bombard.tv':
       videoWindow = jQuery('#ytPlayer')[0];
+      videoWindow.parentNode.style.zIndex = '1000';
       break;
     default:
-      return;
+      break;
   }
 
   //the trick for extension to get Window outside its scope
@@ -39,8 +42,6 @@ function setBombardBackground() {
 //					+ document.width + 'px;height:' + document.height
 //					+ 'px;position:absolute;top:0px;z-index:999');
 	// set the video window z-index
-	var videoWindow = document.querySelectorAll('#watch-player > embed')[0];
-	videoWindow.style.zIndex = '1000';
 
 	// append the background div
 	document.body.appendChild(backgroundDiv);
@@ -146,24 +147,10 @@ function getFBComments()
   //console.log('here at getFBComments');
 	var ytplayer = bombard.yt_player;
 	var videoDuration = parseInt(ytplayer.getDuration());
-	var videoKey = ytplayer.getVideoData().video_id;
+	var videoKey = getVideoId();
 
   var link = 'https://graph.facebook.com/search?q='+videoKey+'&type=post';
 
-  var raw_comments = [];
-
-  bombard.fbc = {}
-
-  function extractComment(response) {
-    return jQuery.map(response.data, function(entry, index){
-      var rComment = {
-        'published' : entry.created_time,
-        'content' : entry.message
-      };
-      raw_comments.push(rComment);
-    });
-  }
-  
   function extractComment2(response) {
     return jQuery.map(response.data, function(entry, index){
       var raw_comment = {
@@ -173,13 +160,13 @@ function getFBComments()
       if (raw_comment.content){
 			  if (raw_comment.content.length < 400) {
 			  	var start = getStartTime(raw_comment) % videoDuration;
-			  	if (bombard.fbc[start]) {
-			  		bombard.fbc[start].push( {
+			  	if (bombard.c[start]) {
+			  		bombard.c[start].push( {
 			  			'text' : raw_comment.content,
               'source': 'FB'
 			  		});
 			  	} else {
-			  		bombard.fbc[start] = [ {
+			  		bombard.c[start] = [ {
 			  			'text' : raw_comment.content,
               'source' : 'FB'
 			  		} ];
@@ -197,72 +184,18 @@ function getFBComments()
 				async : true,
 				success : extractComment2
 			});
-      return;
   }
 
-  var comments = {};
-
-  function getDoneComments(){
-  	jQuery.each(raw_comments,
-			function(index, raw_comment) {
-        //console.log('DEBUG '+raw_comment.content);
-        if (raw_comment.content){
-				  if (raw_comment.content.length < 400) {
-				  	var start = getStartTime(raw_comment) % videoDuration;
-				  	if (comments[start]) {
-				  		comments[start].push( {
-				  			'text' : raw_comment.content,
-                'source': 'FB'
-				  		});
-				  	} else {
-				  		comments[start] = [ {
-				  			'text' : raw_comment.content,
-                'source' : 'FB'
-				  		} ];
-				  	}
-				  }
-        }
-
-			});
-    return;
-  }
-//	var dfd = jQuery.Deferred();
-//	dfd.done(getRawComments, getDoneComments);
-//	dfd.resolve();
-//	//console.log(raw_comments);
-//	return comments;
+  getRawComments();
 }
 // get YT comments for a specific video
 function getYTComments(maxResults) {
 	var ytplayer = bombard.yt_player;
 	var videoDuration = parseInt(ytplayer.getDuration());
-	var videoKey = ytplayer.getVideoData().video_id;
-	//console.log('here at getYTComments');
-	// debugging
-	//console.log(videoDuration + '; ' + videoKey);
-	// return;
-
-	var raw_comments = [];
-	var comments = {};
-
-  bombard.ytc={};
+	var videoKey = getVideoId();
 
 	// handler of youtube feed
-	function extractComment(data) {
-		if (!data.feed.entry){
-			return;
-		}
-		else{
-			return jQuery.map(data.feed.entry, function(entry, index) {
-				var rComment = {
-					'published' : entry.published.$t,
-					'content' : entry.content.$t
-				};
-				raw_comments.push(rComment);
-			});
-		}
-		
-	}
+
 	function extractComment2(data) {
 		if (!data.feed.entry){
 			return;
@@ -275,24 +208,21 @@ function getYTComments(maxResults) {
 				};
 				if (raw_comment.content.length < 300) {
 					var start = getStartTime(raw_comment) % videoDuration;
-					if (bombard.ytc[start]) {
-						bombard.ytc[start].push( {
+					if (bombard.c[start]) {
+						bombard.c[start].push( {
 							'text' : raw_comment.content,
               'source' : 'YT'
 						});
 					} else {
-						bombard.ytc[start] = [ {
+						bombard.c[start] = [ {
 							'text' : raw_comment.content,
               'source' : 'YT'
 						} ];
 					}
-//          console.log(bombard.ytc);
 				}
 			});
 		}
-		
 	}
-
 
 	function getRawComments() {
 		for (startIndex = 1; startIndex <= maxResults; startIndex += 50) {
@@ -308,6 +238,37 @@ function getYTComments(maxResults) {
 
   getRawComments();
 }
+
+//get bombard comments
+function getBBComments(maxResult){
+  var ytplayer = bombard.yt_player;
+	var videoDuration = parseInt(ytplayer.getDuration());
+
+  RPC.loadComment(getVideoId(), maxResult, function (comments) {
+    console.log(comments);
+    jQuery.each(JSON.parse(comments), function(index, commentObj) {
+      //assume the bombard comments are in the right format
+      console.log('bbcomment: '+commentObj);
+      var raw_comment = commentObj.comment;
+      var temp = raw_comment.indexOf(']');
+      var start = parseInt(raw_comment.substr(4, temp-4)) % videoDuration;
+      var comment = raw_comment.substr(temp+1);
+      
+  		if (bombard.c[start]) {
+  			bombard.c[start].push( {
+  				'text' : comment,
+          'source' : 'BB'
+  			});
+  		} else {
+  			bombard.c[start] = [ {
+  				'text' : comment,
+          'source' : 'BB'
+  			} ];
+  		}
+    });
+  });
+}
+
 
 // query youtube once
 function youtubeLink(key, start, max) {
@@ -334,6 +295,17 @@ function animateFBComment(comment){
 function animateComment(comment) {
 	if (!comment.text)
 		return;
+
+  //do processing here according to the source
+  switch (comment.source){
+    case 'FB':
+      comment.text = removeLink(comment.text);
+      break;
+    case 'YT':
+      break;
+    default:
+      break;
+  }
 	var wordCount = comment.text.split(' ').length;
 	var charCount = comment.text.length;
 	if (wordCount<=5 && charCount<20) animateSpecial(comment);
@@ -345,9 +317,21 @@ function bg_worker2() {
     switch (getCurrentDomain()){
       case 'www.youtube.com':
 		    bombard.yt_player = getFGWindow().yt.getConfig('PLAYER_REFERENCE');
+        var videoWindow = document.querySelectorAll('#watch-player > embed')[0];
+        var pos = getAbsPosition(videoWindow);
+        bombard.yt_player['bbwidth'] = parseInt(videoWindow.width);
+        bombard.yt_player['bbheight'] = parseInt(videoWindow.height);
+        bombard.yt_player['bbtop'] = pos['top'];
+        bombard.yt_player['bbleft'] = pos['left'];
         break;
+      case 'localhost':
       case 'www.bombard.tv':
         bombard.yt_player = jQuery('#ytPlayer')[0];
+        var pos = getAbsPosition(bombard.yt_player);
+        bombard.yt_player['bbwidth'] = parseInt(bombard.yt_player.width);
+        bombard.yt_player['bbheight'] = parseInt(bombard.yt_player.height);
+        bombard.yt_player['bbtop'] = pos['top'];
+        bombard.yt_player['bbleft'] = pos['left'];
         break;
       default:
         return;
@@ -357,75 +341,31 @@ function bg_worker2() {
   if (localStorage.getItem('gb_bomb')=='1'){
 		if (bombard.yt_player.getPlayerState() == 1) {
 			var t = Math.floor(bombard.yt_player.getCurrentTime());
-			if (!bombard.ytc) {
+			if (!bombard.c) {
+        bombard.c={};
         getYTComments(250);
-			}
-      if (!bombard.fbc) {
         getFBComments();
-      }
-			if (bombard.ytc && bombard.ytc[t]) {
-				jQuery.each(bombard.ytc[t], function(index, comment) {
+        getBBComments(10);
+			}
+
+			if (bombard.c && bombard.c[t]) {
+				jQuery.each(bombard.c[t], function(index, comment) {
+          comment.height = bombard.yt_player.bbheight;
+          comment.width = bombard.yt_player.bbwidth;
+          comment.left = bombard.yt_player.bbleft;
+          comment.top = bombard.yt_player.bbtop;
 					animateComment(comment);
 				});
 			}
-      if (bombard.fbc && bombard.fbc[t])
-      {
-        jQuery.each(bombard.fbc[t], function (index, comment) {
-          animateFBComment(comment);
-        })
-      }
 		}
 	}
 }
-//function bg_worker() {
-//	if (!bombard.yt_player) {
-//		bombard.yt_player = getFGWindow().yt.getConfig('PLAYER_REFERENCE');
-//		//console.log(bombard.yt_player);
-//	}
-////	if (bombard.gb_bomb == 1) {
-//	// //console.log('here at bg_worker: '+localStorage.getItem('gb_bomb'));
-////  console.log('localStorage gb_bomb: '+localStorage.getItem('gb_bomb'));
-//  if (localStorage.getItem('gb_bomb')=='1'){
-//		if (bombard.worker_running == 0
-//				&& bombard.yt_player.getPlayerState() == 1) {
-//			bombard.worker_running += 1;
-//			var t = Math.floor(getFGWindow().yt.getConfig('PLAYER_REFERENCE')
-//					.getCurrentTime());
-//			if (!bombard.ytc) {
-//				//console.log('bombard.ytc doesn\'t exist');
-////				bombard.ytc = getYTComments(250);
-//        getYTComments(250);
-//				//console.log(bombard.ytc);
-//			}
-//
-//      if (!bombard.fbc) {
-//        //console.log('bombard.fbc doesn\'t exist');
-////        bombard.fbc = getFBComments();
-//        getFBComments();
-//        //console.log(bombard.fbc);
-//      }
-//      console.log(bombard.worker_running);
-//			if (bombard.ytc && bombard.ytc[t]) {
-//				jQuery.each(bombard.ytc[t], function(index, comment) {
-//					animateComment(comment);
-//				});
-//			}
-//      if (bombard.fbc && bombard.fbc[t])
-//      {
-//        jQuery.each(bombard.fbc[t], function (index, comment) {
-//          animateFBComment(comment);
-//        })
-//      }
-//
-//			bombard.worker_running -= 1;
-//		}
-//	}
-//  if(!!bombard){
-//    //running_worker = setTimeout(bg_worker, 1000);
-////    console.log(setTimeout(bg_0worker, 1000));
-//  }
-//}
+
 
 function getCurrentDomain(){
   return document.domain?document.domain:window.location.hostname; 
+}
+
+function getVideoId(){
+  return bombard.yt_player.video_id?bombard.yt_player.video_id:bombard.yt_player.getVideoData().video_id;
 }

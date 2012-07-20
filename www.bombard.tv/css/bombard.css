@@ -3,6 +3,10 @@
 	text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
 }
 
+.dark{
+	text-shadow: -2px 0 #222222, 0 2px #222222, 2px 0 #222222, 0 -2px #222222;
+}
+
 .white
 {
 	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;

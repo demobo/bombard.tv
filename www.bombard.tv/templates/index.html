@@ -114,11 +114,13 @@
 			    function onYouTubePlayerReady(playerId) {
 			      ytplayer = document.getElementById("ytPlayer");
 			      ytplayer.addEventListener("onError", "onPlayerError");
+            ytplayer.video_id = videoID;
 			    }
 				
 				function loadVideo(videoID) {
 				  if(ytplayer) {
 				    ytplayer.loadVideoById(videoID);
+            ytplayer.video_id = videoID;
 				  }
 				}
 </script>

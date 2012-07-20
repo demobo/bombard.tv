@@ -1,18 +1,19 @@
 $(document).ready(function() {
   
-  //set bombard's background
-	setBombardBackground();
-  
   //all data needed by bombard
 	bombard = {};
 	// bombard.gb_bomb = 0;
   bombard.backgroundOn = 1;
 	bombard.ytc = null;
 	bombard.fbc = null;
+  bombard.c = null;
 	bombard.yt_player = null;
 	bombard.unsafeWindow = null;
   bombard.workerId = null;
   bombard.domain = getCurrentDomain();
+
+  //set bombard's background
+	setBombardBackground();
   
   //initiate bg_worker
 //	setTimeout(bg_worker, 5000);
