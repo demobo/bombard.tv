@@ -34,12 +34,11 @@
 </div>
 <script>
     $(document).ready(function(){
-        console.log($('.bullet'));
-      setTimeout(function(){
-        var bombardScript = document.createElement('script');
-        bombardScript.setAttribute('src', 'http://www.bombard.tv/script/bombard.js');
-        document.body.appendChild(bombardScript);		
-      }, 2000);
+	      setTimeout(function(){
+	        var bombardScript = document.createElement('script');
+	        bombardScript.setAttribute('src', 'http://www.bombard.tv/script/bombard.js');
+	        document.body.appendChild(bombardScript);		
+	      }, 2000);
     });
 </script>
 <script src="http://www.google.com/jsapi" type="text/javascript">
@@ -92,7 +91,7 @@
 					// Set the result set to large
 					videoSearch.setResultSetSize(google.search.Search.LARGE_RESULTSET);
 					
-        			searchControl.execute("ytfeed:most_viewed");
+        			searchControl.execute("ytfeed:most_viewed.this_month");
     				
     				searchControl.setSearchCompleteCallback(this, OnSearchComplete);
                 }
@@ -111,21 +110,21 @@
 				
     			// This function is called when an error is thrown by the player
 			    function onPlayerError(errorCode) {
-			      alert("An error occured of type:" + errorCode);
+			      	alert("An error occured of type:" + errorCode);
 			    }
 			    
 			    // This function is automatically called by the player once it loads
 			    function onYouTubePlayerReady(playerId) {
-			      ytplayer = document.getElementById("ytPlayer");
-			      ytplayer.addEventListener("onError", "onPlayerError");
-            ytplayer.video_id = videoID;
+			      	ytplayer = document.getElementById("ytPlayer");
+			      	ytplayer.addEventListener("onError", "onPlayerError");
+            		ytplayer.video_id = videoID;
 			    }
 				
 				function loadVideo(videoID) {
-				  if(ytplayer) {
-				    ytplayer.loadVideoById(videoID);
-            ytplayer.video_id = videoID;
-				  }
+				  	if(ytplayer) {
+				    	ytplayer.loadVideoById(videoID);
+            			ytplayer.video_id = videoID;
+				  	}
 				}
 </script>
 {% endblock %}
