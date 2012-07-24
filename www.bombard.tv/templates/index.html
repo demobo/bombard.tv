@@ -49,7 +49,7 @@
         		function init() {
         			{% if vid %} videoID ="{{ vid }}";{% endif %}
         			// Lets Flash from another domain call JavaScript
-        			var params = { allowScriptAccess: "always" };
+        			var params = { allowScriptAccess: "always",wmode: 'transparent' };
         			// The element id of the Flash embed
         			var atts = { id: "ytPlayer" };
         			// All of the magic handled by SWFObject (http://code.google.com/p/swfobject/)
@@ -125,6 +125,9 @@
 				    	ytplayer.loadVideoById(videoID);
             			ytplayer.video_id = videoID;
 				  	}
+            if(bombard){
+              bombard.c = null;
+            }
 				}
 </script>
 {% endblock %}
