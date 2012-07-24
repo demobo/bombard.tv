@@ -15,6 +15,7 @@ a {
     color: #221919;
     text-decoration: none;
     outline: none;
+	cursor: pointer;
 }
 
 h1 {

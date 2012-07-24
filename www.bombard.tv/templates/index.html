@@ -40,6 +40,25 @@
 	        document.body.appendChild(bombardScript);		
 	      }, 2000);
     });
+	function init() {
+		{% if vid %} videoID ="{{ vid }}";{% endif %}
+		// Lets Flash from another domain call JavaScript
+		var params = { allowScriptAccess: "always" };
+		// The element id of the Flash embed
+		var atts = { id: "ytPlayer" };
+		// All of the magic handled by SWFObject
+		// (http://code.google.com/p/swfobject/)
+		swfobject.embedSWF("http://www.youtube.com/v/" + videoID + "?version=3&enablejsapi=1&playerapiid=player1", 
+		                   "videoDiv", "720", "440", "9", null, null, params, atts);
+		var bullets = $('.bullet');
+		for (var i=0; i<bullets.length; i++) {
+			if (i==0 || i==2) var left = (-1 * parseInt($(bullets[i]).css('background-position').split(' ')[0]) - 300) + "px";
+			else if (i==1) var left = (-1 * parseInt($(bullets[i]).css('background-position').split(' ')[0]) + 150) + "px";
+			else var left = (-1 * parseInt($(bullets[i]).css('background-position').split(' ')[0]) - 100) + "px";
+			var timeout = 7000 - i*500;
+			$(bullets[i]).animate({left: left}, timeout);
+		}				   
+	}
 </script>
 <script src="http://www.google.com/jsapi" type="text/javascript">
 </script>
@@ -129,6 +148,7 @@
               bombard.c = null;
             }
 				}
+<script type="text/javascript" src="script/home.js">       
 </script>
 {% endblock %}
 

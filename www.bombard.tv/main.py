@@ -1,6 +1,8 @@
 import os
 import os.path
 import wsgiref.handlers
+import gdata.youtube
+import gdata.youtube.service
 from google.appengine.ext import webapp
 #from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp import util
@@ -9,8 +11,12 @@ from rpc import *
 class MainPage(webapp.RequestHandler):
 	def get(self):
 		vid = self.request.get("vid")
+		entry = {}
+		if vid:
+			service = gdata.youtube.service.YouTubeService()
+			entry = service.GetYouTubeVideoEntry(video_id=vid)	
 		template_file_name = 'index.html'     
-		template_values = {'vid': vid}
+		template_values = {'vid': vid, 'entry': entry}
 		path = os.path.join(os.path.dirname(__file__), "templates", template_file_name)
 		self.response.out.write(template.render(path, template_values)) 
         
