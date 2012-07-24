@@ -40,13 +40,13 @@ OnSearchComplete = function(sc, searcher) {
 		console.log(searcher.results[i]);
 		var vid = searcher.results[i].tbUrl.split('/')[4];
 		var videoresult = $('<div class="videoresult"><a onclick="javascript:loadVideo(\''+vid+'\')"><img src="'+searcher.results[i].tbUrl+'"></a></div>');
-//		$('#visualizer').qtip({
-//			content: e.result, 
-//			show: {ready: true, effect: function(offset) {$(this).slideDown(100);}}, 
-//			position: {my: 'right bottom', at:'center'}, 
-//			style: {classes: 'ui-tooltip-blue ui-tooltip-youtube', width: 300, height: 100} 
-//		} );
 		$("#Videoresults").append(videoresult);
+		videoresult.qtip({
+			content: searcher.results[i].title + "<br>" + "View Count: "+ addCommas(searcher.results[i].viewCount), 
+			show: {ready: false}, 
+			position: {my: 'bottom center', at:'top center'}, 
+			style: {classes: 'ui-tooltip-blue ui-tooltip-youtube', width: 300, height: 100} 
+		} );
 	}
 	videoID = vid;
 	init();
@@ -71,4 +71,16 @@ function loadVideo(videoID) {
 //		ytplayer.video_id = videoID;
 //  	}
   	window.location = "/?vid=" + videoID;
+}
+
+function addCommas(str) {
+    var amount = new String(str);
+    amount = amount.split("").reverse();
+
+    var output = "";
+    for ( var i = 0; i <= amount.length-1; i++ ){
+        output = amount[i] + output;
+        if ((i+1) % 3 == 0 && (amount.length-1) !== i)output = ',' + output;
+    }
+    return output;
 }
