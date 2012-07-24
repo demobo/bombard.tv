@@ -5,11 +5,14 @@
 <meta http-equiv="content-script-type" content="text/javascript">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="viewport" content="width=device-width, user-scalable=no" />
+{% if vid %}<meta property="og:image" content="http://i4.ytimg.com/vi/{{ vid }}/mqdefault.jpg">{% endif %}
 <!-- Style -->
 <link rel="stylesheet" type="text/css" href="css/home.css" />
+<link rel="stylesheet" type="text/css" href="css/qtip.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
 <script type="text/javascript" src="script/rpc.js"></script>
+<script type="text/javascript" src="script/qtip.js"></script>
 {% block head %}{% endblock %}
 </head>
 <body>

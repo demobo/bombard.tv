@@ -20,6 +20,7 @@ function setBombardBackground() {
       videoWindow.style.zIndex = '1000';
       break;
     case 'localhost':
+    case 'dev.demobo.com':
     case 'www.bombard.tv':
       videoWindow = jQuery('#ytPlayer')[0];
       videoWindow.parentNode.style.zIndex = '1000';
