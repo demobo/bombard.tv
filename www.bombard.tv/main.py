@@ -14,7 +14,9 @@ class MainPage(webapp.RequestHandler):
 		entry = {}
 		if vid:
 			service = gdata.youtube.service.YouTubeService()
-			entry = service.GetYouTubeVideoEntry(video_id=vid)	
+			entry = service.GetYouTubeVideoEntry(video_id=vid)
+		if entry and len(entry.media.description.text)>40:
+			entry.media.description.text = entry.media.description.text[:40] + "..."
 		template_file_name = 'index.html'     
 		template_values = {'vid': vid, 'entry': entry}
 		path = os.path.join(os.path.dirname(__file__), "templates", template_file_name)

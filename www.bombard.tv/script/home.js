@@ -28,8 +28,11 @@ function OnLoad() {
 	// Set the result set to large
 	videoSearch.setResultSetSize(google.search.Search.LARGE_RESULTSET);
 	
-	searchControl.execute("ytfeed:most_viewed.this_month");
-	
+	if (curVideo) {
+		searchControl.execute(curVideo.tags);
+	} else {
+		searchControl.execute("ytfeed:most_viewed.this_month");
+	}
 	searchControl.setSearchCompleteCallback(this, OnSearchComplete);
 }
 google.setOnLoadCallback(OnLoad);
@@ -48,7 +51,7 @@ OnSearchComplete = function(sc, searcher) {
 			style: {classes: 'ui-tooltip-blue ui-tooltip-youtube', width: 300, height: 100} 
 		} );
 	}
-	videoID = vid;
+	if (!videoID) videoID = vid;
 	init();
 };
 

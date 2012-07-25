@@ -40,8 +40,19 @@
 	        document.body.appendChild(bombardScript);		
 	      }, 2000);
     });
+	videoID = false;
+	curVideo = false;
+	{% if vid %} videoID ="{{ vid }}";{% endif %}
+	{% if entry %}
+	curVideo = {vid: "{{ vid }}",
+				title: "{{ entry.media.title.text }}",
+				published: "{{ entry.published.text }}",
+				tags: "{{ entry.media.keywords.text }}",
+				duration: "{{ entry.media.duration.seconds }}",
+				viewCount: "{{ entry.statistics.view_count }}",
+				description: "{{ entry.media.description.text }}"};
+	{% endif %}
 	function init() {
-		{% if vid %} videoID ="{{ vid }}";{% endif %}
 		// Lets Flash from another domain call JavaScript
 		var params = { allowScriptAccess: "always" };
 		// The element id of the Flash embed

@@ -5,7 +5,15 @@
 <meta http-equiv="content-script-type" content="text/javascript">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="viewport" content="width=device-width, user-scalable=no" />
-{% if vid %}<meta property="og:image" content="http://i4.ytimg.com/vi/{{ vid }}/mqdefault.jpg">{% endif %}
+{% if vid %}
+<meta property="og:url" content="http://www.youtube.com/watch?v={{ vid }}">
+<meta property="og:image" content="http://i4.ytimg.com/vi/{{ vid }}/mqdefault.jpg">
+{% endif %}
+{% if entry %}
+<meta property="og:title" content="{{ entry.media.title.text }}">
+<meta property="og:description" content="{{ entry.media.description.text }}">
+{% endif %}
+<meta property="og:type" content="video">
 <!-- Style -->
 <link rel="stylesheet" type="text/css" href="css/home.css" />
 <link rel="stylesheet" type="text/css" href="css/qtip.css" />
