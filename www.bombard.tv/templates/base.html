@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" class="en">
 <head>
+{% if entry %}
+<title>{{ entry.media.title.text }}</title>
+{% else %}
 <title>Bombard TV</title>
+{% endif %}
 <meta http-equiv="content-script-type" content="text/javascript">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="viewport" content="width=device-width, user-scalable=no" />
+{% if entry %}
+<meta name="title" content="{{ entry.media.title.text }}">
+<meta name="description" content="{{ entry.media.description.text }}">
+<meta property="og:title" content="{{ entry.media.title.text }}">
+<meta property="og:description" content="{{ entry.media.description.text }}">
+{% endif %}
 {% if vid %}
 <meta property="og:url" content="http://www.youtube.com/watch?v={{ vid }}">
 <meta property="og:image" content="http://i4.ytimg.com/vi/{{ vid }}/mqdefault.jpg">
-{% endif %}
-{% if entry %}
-<meta property="og:title" content="{{ entry.media.title.text }}">
-<meta property="og:description" content="{{ entry.media.description.text }}">
+<meta property="og:video" content="http://www.youtube.com/v/{{ vid }}?version=3&amp;autohide=1">
+<meta property="og:video:type" content="application/x-shockwave-flash">
+<meta property="og:video:width" content="480">
+<meta property="og:video:height" content="360">
+<meta property="og:site_name" content="YouTube">
+<meta property="fb:app_id" content="87741124305">
 {% endif %}
 <meta property="og:type" content="video">
 <!-- Style -->
