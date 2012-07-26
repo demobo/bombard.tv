@@ -247,6 +247,9 @@ function getBBComments(maxResult){
 
   RPC.loadComment(getVideoId(), maxResult, function (comments) {
     console.log(comments);
+    if (!comments){
+      return;
+    }
     jQuery.each(JSON.parse(comments), function(index, commentObj) {
       //assume the bombard comments are in the right format
       console.log('bbcomment: '+commentObj);

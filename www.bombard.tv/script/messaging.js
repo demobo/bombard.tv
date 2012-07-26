@@ -30,6 +30,16 @@ function setTimeStamp(){
   bombard.tempTimeStamp=Math.floor(bombard.yt_player.getCurrentTime());
 }
 
+function sendComments(){
+  if (bombard.commentsToSave){
+    var vid = bombard.yt_player.video_id;
+    for (comment in bombard.commentsToSave){
+      RPC.saveComment(vid,'[bbd'+comment['time']+']'+processUserComment(comment['comment']));
+    }
+    bombard.commentsToSave = null;
+  }
+}
+
 //update comment as the user is typing
 function updateComment(code){
 
@@ -57,9 +67,9 @@ function updateComment(code){
 }
 
 //process the comment typed by user, i.e. add timestamp, filtering, .....
-function processUserComment(){
+function processUserComment(comment){
   //now just return raw comment
-  return $('#textInput').val();
+  return comment;
 }
 
 //User hit ENTER after typing comment

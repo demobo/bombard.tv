@@ -86,6 +86,11 @@ $(document).ready(function() {
 			bombard.workerId = setInterval(bg_worker2, 1000);
 			localStorage.setItem('workerId', bombard.workerId);
 		}
+    if ('onpagehide' in window){
+      window.addEventListener('pagehide', sendComments, false); 
+    }else{
+      window.addEventListener('unload', sendComments, false);
+    }
 		localStorage.removeItem('bombardLoading');
 		bombardLoading = undefined;
 	});
