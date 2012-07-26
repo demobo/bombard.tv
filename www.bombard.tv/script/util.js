@@ -349,15 +349,16 @@ function bg_worker2() {
       bombard.yt_player.addEventListener("onStateChange", "onPlayerStateChangeHandleAnimation");
   }
 
+  if (!bombard.c) {
+    bombard.c={};
+    getYTComments(250);
+    getFBComments();
+    getBBComments(10);
+  }
+
   if (localStorage.getItem('gb_bomb')=='1'){
     if (bombard.yt_player.getPlayerState() == 1) {
       var t = Math.floor(bombard.yt_player.getCurrentTime());
-      if (!bombard.c) {
-        bombard.c={};
-        getYTComments(250);
-        getFBComments();
-        getBBComments(10);
-      }
 
       if (bombard.c && bombard.c[t]) {
         jQuery.each(bombard.c[t].slice(0,10), function(index, comment) {
