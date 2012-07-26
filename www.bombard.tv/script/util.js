@@ -314,8 +314,9 @@ function animateComment(comment) {
 }
 
 function onPlayerStateChangeHandleAnimation(newState) {
-	if (newState==1) jQuery('.animated-comment').resume();
-	else jQuery('.animated-comment').pause();
+	// ended (0), playing (1), paused (2), video cued (5) or unstarted (-1)
+	if (newState==2) jQuery('.animated-comment').pause();
+	else jQuery('.animated-comment').resume();
 }
 
 function bg_worker2() {
