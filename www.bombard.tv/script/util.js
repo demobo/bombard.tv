@@ -360,7 +360,7 @@ function bg_worker2() {
 			}
 
 			if (bombard.c && bombard.c[t]) {
-				jQuery.each(bombard.c[t], function(index, comment) {
+				jQuery.each(bombard.c[t].slice(0,10), function(index, comment) {
           comment.height = bombard.yt_player.bbheight;
           comment.width = bombard.yt_player.bbwidth;
           comment.left = bombard.yt_player.bbleft;
