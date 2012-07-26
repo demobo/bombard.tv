@@ -313,7 +313,7 @@ function animateComment(comment) {
 	else animateDefault(comment);
 }
 
-function onPlayerStateChange(newState) {
+function onPlayerStateChangeHandleAnimation(newState) {
 	if (newState==1) jQuery('.animated-comment').resume();
 	else jQuery('.animated-comment').pause();
 }
@@ -342,7 +342,7 @@ function bg_worker2() {
 	      default:
 	        return;
 	    }
-	    bombard.yt_player.addEventListener("onStateChange", "onPlayerStateChange");
+	    bombard.yt_player.addEventListener("onStateChange", "onPlayerStateChangeHandleAnimation");
 	}
 
   if (localStorage.getItem('gb_bomb')=='1'){
