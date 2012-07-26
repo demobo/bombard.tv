@@ -33,7 +33,6 @@ function setTimeStamp(){
 function sendComments(){
   if (bombard.commentsToSave){
     var vid = bombard.yt_player.video_id;
-    for (comment in bombard.commentsToSave){
     jQuery.each(bombard.commentsToSave, function(index, comment){
       RPC.saveComment(vid,'[bbd'+comment['time']+']'+processUserComment(comment['comment']));
     });
