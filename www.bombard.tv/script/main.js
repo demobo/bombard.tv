@@ -35,8 +35,11 @@ $(document).ready(function() {
 			// TODO: instead of document, need a more specific DOM object
 			$(document).keyup(function(e) {
 				var code = (e.keyCode ? e.keyCode : e.which);
-
-				if (bombard.backgroundOn) {
+        var activeElem = document.activeElement;
+        //typing in input areas other than textInput
+        if (activeElem.nodeName=='INPUT' && activeElem.id!='textInput'){
+          
+				}else if (bombard.backgroundOn) {
 					// the user is typing
 					if (isInputting()) {
 						// if user presses ENTER, bomb the comment
@@ -62,6 +65,7 @@ $(document).ready(function() {
 							// alphanumerical keys
 						} else if (code > 47 && code < 91) {
 							$('#textInput').focus();
+              setTimeStamp();
 							updateComment(code);
 						}
 					}

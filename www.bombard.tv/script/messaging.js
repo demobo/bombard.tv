@@ -26,6 +26,10 @@ function isInputting(){
   return jQuery('#live-comment').length>0 && jQuery('#live-comment').text()!='';
 }
 
+function setTimeStamp(){
+  bombard.tempTimeStamp=Math.floor(bombard.yt_player.getCurrentTime());
+}
+
 //update comment as the user is typing
 function updateComment(code){
 
@@ -68,10 +72,14 @@ function commitComment(){
   {
     //TODO: increase the speed of RPC. as tested, it really slows down the whole page.
 //     RPC.saveComment(bombard.yt_player.getVideoData()['video_id'],processUserComment());
-
+      if (!bombard.commentsToSave){
+        bombard.commentsToSave=[{'time':bombard.tempTimeStamp+'', 'comment':c.text()}];
+      }else{
+        bombard.commentsToSave.push({'time':bombard.tempTimeStamp+'', 'comment':c.text()});
+      }
      
      //TODO: timestamp should be got when user starts typing instead of after typing
-     var time = bombard.yt_player.getCurrentTime();
+//     var time = bombard.yt_player.getCurrentTime();
      //TODO: youtubePost needs to use API
 //     youtubePost(parseInt(time/60)+':'+parseInt(time%60)+' ' + document.getElementById('live-comment').innerHTML);
      c.attr('id', 'running-live-comment');
