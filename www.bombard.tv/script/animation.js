@@ -1,16 +1,16 @@
 function animateSpecial(comment) {
-	if (comment.text.length > 70)
-		return;
-	else {
-		var top = (comment.top+20 +getRand6()[0]*(comment.height-20)/6 ) + 'px' || '80px';
-		var left = (comment.left + Math.floor(Math.random() * (comment.width-50)) ) + 'px' || '80px';
-	}
-	var fontSize = (Math.floor(Math.random() * 10 + 10))*3 + 'px' || '60px';
-	var commentText = comment.text || '';
+  if (comment.text.length > 70)
+    return;
+  else {
+    var top = (comment.top+20 +getRand6()[0]*(comment.height-20)/6 ) + 'px' || '80px';
+    var left = (comment.left + Math.floor(Math.random() * (comment.width-50)) ) + 'px' || '80px';
+  }
+  var fontSize = (Math.floor(Math.random() * 10 + 10))*3 + 'px' || '60px';
+  var commentText = comment.text || '';
   switch (comment.source){
     case 'FB':
-		  var color = '#3B5998';
-		  var newClass = 'white';
+      var color = '#3B5998';
+      var newClass = 'white';
     break;
     case 'BB':
       var color = 'white';
@@ -21,7 +21,7 @@ function animateSpecial(comment) {
       var newClass='';  
       break;
   }
-	var newComment = $('<div class="animated-comment '+newClass+'">'+commentText+'</div>');
+  var newComment = $('<div class="animated-comment '+newClass+'">'+commentText+'</div>');
   newComment.css({position:'absolute', color: color, left: left, 'top': top,'font-family': "Arial Black", 
   'font-size': fontSize, 'font-weight': 'bolder','-webkit-transition':'-webkit-transform 0.6s ease-out', 'z-index':'9999', '-webkit-transform': 'translateZ(0)'});
   jQuery('body').append(newComment);
@@ -51,24 +51,24 @@ function animateUserComment(showElement){
 }
 
 function animateDefault(comment) {
-	if (comment.text.length > 140)
-		return;
-	else if (comment.text.length % 3 == 0) {
-		var height = (10 + getRand4()[0]*(comment.top-10)/4) + 'px' || '80px';
-		var left = Math.floor(Math.random() * 40 + 80)  + "%";
-		var fontSize = (Math.floor(Math.random() * 7 + 10))*2 + 'px' || '34px';
-	} else {
+  if (comment.text.length > 140)
+    return;
+  else if (comment.text.length % 3 == 0) {
+    var height = (10 + getRand4()[0]*(comment.top-10)/4) + 'px' || '80px';
+    var left = Math.floor(Math.random() * 40 + 80)  + "%";
+    var fontSize = (Math.floor(Math.random() * 7 + 10))*2 + 'px' || '34px';
+  } else {
     console.log(comment);
-		var height = (130+comment.top+comment.height + getRand6()[0]*40) + 'px' || '80px';
-		var left = Math.floor(Math.random() * 40 + 80)  + "%";
-		var fontSize = (Math.floor(Math.random() * 10 + 10))*2 + 'px' || '40px';
-	}
-	var animateTime = Math.floor(Math.random() * 10000 + 25000);
-	var commentText = comment.text || '';
+    var height = (130+comment.top+comment.height + getRand6()[0]*40) + 'px' || '80px';
+    var left = Math.floor(Math.random() * 40 + 80)  + "%";
+    var fontSize = (Math.floor(Math.random() * 10 + 10))*2 + 'px' || '40px';
+  }
+  var animateTime = Math.floor(Math.random() * 10000 + 25000);
+  var commentText = comment.text || '';
   switch (comment.source){
     case 'FB':
-		  var color = '#3B5998';
-		  var newClass = 'white';
+      var color = '#3B5998';
+      var newClass = 'white';
     break;
     case 'BB':
       var color = 'white';
@@ -80,7 +80,7 @@ function animateDefault(comment) {
       break;
   }
 
-	var newComment = $('<div class="animated-comment '+newClass+'">'+commentText+'</div>');
+  var newComment = $('<div class="animated-comment '+newClass+'">'+commentText+'</div>');
     newComment.css({width:'1000%',position:'absolute', color: color, left:left, 'top':height,'font-family': "Arial Black", 
     'font-size': fontSize, 'font-weight': 'bolder','-webkit-transition':'-webkit-transform 0.6s ease-out', 'z-index':'9999', '-webkit-transform': 'translateZ(0)'});
     jQuery('body').append(newComment);
