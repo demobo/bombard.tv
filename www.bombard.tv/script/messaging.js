@@ -51,7 +51,7 @@ function updateComment(code){
     $('#textInput').val(val.substr(temp));
   }
 
-	if (!val){
+  if (!val){
     $('#textInput').val(String.fromCharCode(code));
   }
   var c = document.getElementById('live-comment');
@@ -63,7 +63,7 @@ function updateComment(code){
     $(c).addClass('running-comment');
   }
 
-	$(c).text($('#textInput').val());
+  $(c).text($('#textInput').val());
 }
 
 //process the comment typed by user, i.e. add timestamp, filtering, .....
@@ -82,10 +82,17 @@ function commitComment(){
   {
     //TODO: increase the speed of RPC. as tested, it really slows down the whole page.
 //     RPC.saveComment(bombard.yt_player.getVideoData()['video_id'],processUserComment());
+      var temp = bombard.tempTimeStamp;
       if (!bombard.commentsToSave){
-        bombard.commentsToSave=[{'time':bombard.tempTimeStamp+'', 'comment':c.text()}];
+        bombard.commentsToSave=[{'time':temp+'', 'comment':c.text()}];
       }else{
-        bombard.commentsToSave.push({'time':bombard.tempTimeStamp+'', 'comment':c.text()});
+        bombard.commentsToSave.push({'time':temp+'', 'comment':c.text()});
+      }
+      
+      if (!bombard.c[temp]){
+        bombard.c[temp] = [{'text':c.text(), 'source':'BB'}];
+      }else{
+        bombard.c[temp].push({'text':c.text(), 'source':'BB'});
       }
      
      //TODO: timestamp should be got when user starts typing instead of after typing
