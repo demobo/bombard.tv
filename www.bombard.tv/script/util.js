@@ -89,14 +89,14 @@ function renderPlayPause() {
       localStorage.setItem('gb_bomb',0);
     	animateInput('||');
     	bombard.yt_player.pauseVideo();
-    	jQuery('.animated-comment').pause();
+//    	jQuery('.animated-comment').pause();
     }
     else
     {
       localStorage.setItem('gb_bomb',1);
     	animateInput('&#x25b6;');
     	bombard.yt_player.playVideo();
-    	jQuery('.animated-comment').resume();
+//    	jQuery('.animated-comment').resume();
 //    	bg_worker();
     }
 }
@@ -313,30 +313,36 @@ function animateComment(comment) {
 	else animateDefault(comment);
 }
 
+function onPlayerStateChange(newState) {
+	if (newState==1) jQuery('.animated-comment').resume();
+	else jQuery('.animated-comment').pause();
+}
+
 function bg_worker2() {
 	if (!bombard.yt_player) {
-    switch (getCurrentDomain()){
-      case 'www.youtube.com':
-		    bombard.yt_player = getFGWindow().yt.getConfig('PLAYER_REFERENCE');
-        var videoWindow = document.querySelectorAll('#watch-player > embed')[0];
-        var pos = getAbsPosition(videoWindow);
-        bombard.yt_player['bbwidth'] = parseInt(videoWindow.width);
-        bombard.yt_player['bbheight'] = parseInt(videoWindow.height);
-        bombard.yt_player['bbtop'] = pos['top'];
-        bombard.yt_player['bbleft'] = pos['left'];
-        break;
-      case 'localhost':
-      case 'www.bombard.tv':
-        bombard.yt_player = jQuery('#ytPlayer')[0];
-        var pos = getAbsPosition(bombard.yt_player);
-        bombard.yt_player['bbwidth'] = parseInt(bombard.yt_player.width);
-        bombard.yt_player['bbheight'] = parseInt(bombard.yt_player.height);
-        bombard.yt_player['bbtop'] = pos['top'];
-        bombard.yt_player['bbleft'] = pos['left'];
-        break;
-      default:
-        return;
-    }
+	    switch (getCurrentDomain()){
+	      case 'www.youtube.com':
+			    bombard.yt_player = getFGWindow().yt.getConfig('PLAYER_REFERENCE');
+	        var videoWindow = document.querySelectorAll('#watch-player > embed')[0];
+	        var pos = getAbsPosition(videoWindow);
+	        bombard.yt_player['bbwidth'] = parseInt(videoWindow.width);
+	        bombard.yt_player['bbheight'] = parseInt(videoWindow.height);
+	        bombard.yt_player['bbtop'] = pos['top'];
+	        bombard.yt_player['bbleft'] = pos['left'];
+	        break;
+	      case 'localhost':
+	      case 'www.bombard.tv':
+	        bombard.yt_player = jQuery('#ytPlayer')[0];
+	        var pos = getAbsPosition(bombard.yt_player);
+	        bombard.yt_player['bbwidth'] = parseInt(bombard.yt_player.width);
+	        bombard.yt_player['bbheight'] = parseInt(bombard.yt_player.height);
+	        bombard.yt_player['bbtop'] = pos['top'];
+	        bombard.yt_player['bbleft'] = pos['left'];
+	        break;
+	      default:
+	        return;
+	    }
+	    bombard.yt_player.addEventListener("onStateChange", "onPlayerStateChange");
 	}
 
   if (localStorage.getItem('gb_bomb')=='1'){

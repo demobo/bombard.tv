@@ -1,3 +1,4 @@
+import cgi
 import os
 import os.path
 import wsgiref.handlers
@@ -16,9 +17,12 @@ class MainPage(webapp.RequestHandler):
 			service = gdata.youtube.service.YouTubeService()
 			entry = service.GetYouTubeVideoEntry(video_id=vid)
 		if entry:
-			entry.media.title.text = entry.media.title.text.replace('"', '\\"')	
-		if entry and len(entry.media.description.text)>40:
-			entry.media.description.text = entry.media.description.text[:40].replace('"', '\\"') + "..."
+			if entry.media.title.text:
+				entry.media.title.text = entry.media.title.text.replace('\n', '').replace('"', '&quot;')
+			if entry.media.description.text:
+				entry.media.description.text = cgi.escape(entry.media.description.text.replace('\n', '').replace('"', '&quot;'))
+				if entry and len(entry.media.description.text)>100:
+					entry.media.description.text = cgi.escape(entry.media.description.text[:100]) + "..."
 		template_file_name = 'index.html'     
 		template_values = {'vid': vid, 'entry': entry}
 		path = os.path.join(os.path.dirname(__file__), "templates", template_file_name)
