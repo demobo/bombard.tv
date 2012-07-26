@@ -36,8 +36,9 @@
     $(document).ready(function(){
 	      setTimeout(function(){
 	        var bombardScript = document.createElement('script');
-	        bombardScript.setAttribute('src', 'http://www.bombard.tv/script/bombard.js');
-	        document.body.appendChild(bombardScript);		
+			if (window.location.hostname == "localhost") bombardScript.setAttribute('src', 'http://www.bombard.tv/script/bombard-test.js');
+	        else bombardScript.setAttribute('src', 'http://www.bombard.tv/script/bombard.js');
+	        document.body.appendChild(bombardScript);	
 	      }, 2000);
     });
 	videoID = false;
