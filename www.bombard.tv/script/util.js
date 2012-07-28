@@ -351,9 +351,9 @@ function bg_worker2() {
 
   if (!bombard.c) {
     bombard.c={};
+    getBBComments(250);
     getYTComments(250);
     getFBComments();
-    getBBComments(10);
   }
 
   if (localStorage.getItem('gb_bomb')=='1'){
